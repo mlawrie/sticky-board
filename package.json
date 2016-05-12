@@ -5,6 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info",
     "postinstall": "node_modules/.bin/typings install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -34,6 +35,7 @@
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.9.1",
-    "webpack-split-by-path": "0.0.8" 
+    "webpack-split-by-path": "0.0.8",
+    "html-webpack-plugin": "^2.9.0"
   }
 }
