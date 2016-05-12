@@ -1,0 +1,39 @@
+{
+  "name": "sticky-board",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node_modules/.bin/typings install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.2.0",
+    "immutable": "^3.7.6",
+    "mocha": "^2.4.5",
+    "react": "^15.0.2",
+    "react-addons-test-utils": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "react-redux": "^4.4.4",
+    "react-router": "^2.4.0",
+    "react-router-redux": "^4.0.0",
+    "redux": "^3.4.0",
+    "redux-form": "^5.2.1",
+    "redux-thunk": "^2.0.1",
+    "sinon": "^1.17.3",
+    "ts-loader": "^0.8.2",
+    "ts-node": "^0.7.2",
+    "tslint": "^3.7.4",
+    "tslint-loader": "^2.1.0",
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.9.1",
+    "webpack-split-by-path": "0.0.8" 
+  }
+}
