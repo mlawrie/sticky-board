@@ -6,7 +6,8 @@
     "target": "es6",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
     "removeComments": false,
     "sourceMap": true,
     "jsx": "react"
