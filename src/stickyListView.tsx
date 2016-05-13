@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Sticky} from './sticky'
 import { subscribe } from './subscribe'
-import StickyView from './sticky_view'
+import StickyView from './stickyView'
 import Immutable = require('immutable')
 
 interface StickyListViewState {

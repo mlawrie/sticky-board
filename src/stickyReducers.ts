@@ -1,5 +1,4 @@
 import {isType, updateStickyAction, createStickyAction, Action} from './actions'
-import ImmutableArray from './immutable_array'
 import {Sticky, modifySticky} from './sticky'
 import combine from './combine'
 import uuid = require('node-uuid')

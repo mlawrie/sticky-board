@@ -17,5 +17,5 @@ export const isType = <T>(action: Action<any>, actionCreator: ActionCreator<T>):
 
 import {Sticky} from './sticky'
 
-export const createStickyAction = actionCreator<{x: number, y: number}>('CREATE_STICKY')
+export const createStickyAction = actionCreator<{x: number, y: number, body: string}>('CREATE_STICKY')
 export const updateStickyAction = actionCreator<{x: number, y: number, uuid: string}>('UPDATE_STICKY')

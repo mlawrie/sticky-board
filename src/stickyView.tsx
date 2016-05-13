@@ -1,5 +1,5 @@
 import * as React from 'react'
-import MouseDragMonitor from './mouse_drag_monitor'
+import MouseDragMonitor from './mouseDragMonitor'
 import {Sticky, modifySticky} from './sticky'
 import { subscribe } from './subscribe'
 import { dispatch } from './reduxStore'
@@ -33,6 +33,7 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
         onMouseDown={this.mouseDragMonitor.mouseDown}
         onMouseUp={this.mouseDragMonitor.mouseUp}
         onMouseMove={this.mouseDragMonitor.mouseMove}>
+        <div style={styles.inside}>{this.state.sticky.body}</div>
       </div>
     );
   }
@@ -44,6 +45,15 @@ const styles = {
     backgroundColor: '#ffff00',
     border: '1px solid #ee0',
     width: 200,
-    height: 200
+    height: 200,
+    display: 'table'
+  },
+  inside: {
+    display: 'table-cell',
+    verticalAlign: 'middle',
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: 'Comic Sans MS',
+    
   }
 };
