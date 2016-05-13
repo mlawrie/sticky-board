@@ -1,9 +1,8 @@
 import {MouseEventHandler, MouseEvent} from 'react'
-import Immutable from './immutable'
 
 interface Vector {
-    readonly x: number
-    readonly y: number
+  readonly x: number
+  readonly y: number
 }
 
 const subtract = (v1:Vector, v2: Vector) => ({x: v1.x - v2.x, y: v1.y - v2.y})

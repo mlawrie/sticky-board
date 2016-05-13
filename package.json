@@ -19,21 +19,23 @@
     "react": "^15.0.2",
     "react-addons-test-utils": "^15.0.2",
     "react-dom": "^15.0.2",
-    "react-redux": "^4.4.4",
+  "react-redux": "^4.4.4",
     "react-router": "^2.4.0",
     "react-router-redux": "^4.0.0",
-    "redux": "^3.4.0",
+    "redux": "^3.5.2",
     "redux-form": "^5.2.1",
     "redux-thunk": "^2.0.1",
     "sinon": "^1.17.3",
     "ts-loader": "^0.8.2",
     "ts-node": "^0.7.2",
-    "typescript": "Microsoft/TypeScript#d8d5dafe1a701a0b9466e53637f0ff3c63d55835",
+    "typescript": "1.9.0-dev.20160512",
     "typings": "^0.8.1",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.9.1",
     "webpack-split-by-path": "0.0.8",
-    "html-webpack-plugin": "^2.9.0"
+    "html-webpack-plugin": "^2.9.0",
+    "node-uuid": "",
+    "lodash": ""
   }
 }

@@ -1,29 +1,31 @@
 import * as React from 'react'
 import MouseDragMonitor from './mouse_drag_monitor'
-import {Sticky, StickyClone} from './sticky'
+import {Sticky, modifySticky} from './sticky'
+import { subscribe } from './subscribe'
+import { dispatch } from './reduxStore'
+import { updateStickyAction } from './actions'
+ 
 
-new MouseDragMonitor(() => {})
 
-class StickyView extends React.Component<{}, Sticky> {
+interface StickyViewState {sticky: Sticky}
+
+export default class StickyView extends React.Component<{uuid: string}, StickyViewState> {
   private mouseDragMonitor:MouseDragMonitor
   
   constructor(props: any) {
     super(props)
-    
     this.mouseDragMonitor = new MouseDragMonitor((delta) => {
-      const newSticky = new StickyClone(this.state, {
-        x: this.state.x + delta.x,
-        y: this.state.y + delta.y
-      }).get()
-      
-      this.setState(newSticky)
-    }) 
-    
-    this.state = {x: 0, y: 0, z: 1}
+      let x = this.state.sticky.x + delta.x
+      let y = this.state.sticky.y + delta.y
+      dispatch(updateStickyAction({uuid: this.props.uuid, x, y}))
+    })
+    subscribe<StickyViewState>((state) => ({sticky: state.stickies.get(this.props.uuid)}), this)
   }
+  
   render() {
+    
     const style = Object.assign({}, styles.container,
-      {top: this.state.y, left: this.state.x, zIndex: this.state.z})
+      {top: this.state.sticky.y, left: this.state.sticky.x, zIndex: this.state.sticky.z})
 
     return (
       <div
@@ -35,8 +37,6 @@ class StickyView extends React.Component<{}, Sticky> {
     );
   }
 }
-
-export default StickyView
 
 const styles = {
   container: {

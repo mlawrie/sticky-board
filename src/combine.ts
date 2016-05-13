@@ -1,0 +1,1 @@
+export default <T, U>(first: T, second: U) => Object.assign({}, first, second) as T & U

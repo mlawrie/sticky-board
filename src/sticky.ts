@@ -1,4 +1,4 @@
-import ImmutableClone from './immutable_clone'
+import immutablyModifyMap from './immutablyModifyMap'
 
 interface StickyMutator {
   x?: number
@@ -12,5 +12,4 @@ export interface Sticky {
   readonly z: number
 }
 
-export class StickyClone extends ImmutableClone<Sticky, StickyMutator> {}
-
+export const modifySticky = immutablyModifyMap<Sticky, StickyMutator>()
