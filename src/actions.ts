@@ -14,8 +14,6 @@ const actionCreator = <T>(type: string): ActionCreator<T> =>
 export const isType = <T>(action: Action<any>, actionCreator: ActionCreator<T>): action is Action<T> =>
    action.type === actionCreator.type
 
-import {Sticky} from './sticky'
-
 export const createStickyAction = actionCreator<{x: number, y: number, body: string}>('CREATE_STICKY')
 export const moveCanvasPositionAction = actionCreator<{x: number, y: number}>('UPDATE_CANVAS_POSITION')
 export const updateStickyAction = actionCreator<{x: number, y: number, uuid: string}>('UPDATE_STICKY')
