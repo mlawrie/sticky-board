@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
 import StickyListView from './stickyListView'
-import Canvas from './canvas'
+import CanvasView from './canvasView'
 import {getState, dispatch, subscribeToState} from './reduxStore'
 import {createStickyAction} from './actions'
 
@@ -12,7 +12,7 @@ dispatch(createStickyAction({x: 500, y: 500, body: "i am a sticky"}))
 dispatch(createStickyAction({x: 100, y: 100, body: "i am immutable"}))
 ReactDOM.render(
   <div>
-    <Canvas/>
+    <CanvasView/>
     <StickyListView/>
   </div>,
   document.getElementById('app')

@@ -10,7 +10,7 @@ let lastZ = 0
 const nextZ = () => { lastZ += 1; return lastZ}    
 
 export interface StickiesState {
-  stickies: Stickies 
+  readonly stickies: Stickies 
 }
 
 export const stickiesReducers = (state: Stickies = Immutable.Map<string, Sticky>(), action: Action<any>): Stickies => {

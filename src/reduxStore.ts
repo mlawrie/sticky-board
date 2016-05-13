@@ -1,12 +1,13 @@
 import { createStore, combineReducers, Unsubscribe } from 'redux'
 import { Action } from './actions'
 import { stickiesReducers, StickiesState } from './stickyReducers'
+import { canvasReducers, CanvasState } from './canvasReducers'
 
 const reducer = combineReducers({
-  stickies: stickiesReducers
-});
-
-export interface State extends StickiesState {}
+  stickies: stickiesReducers,
+  canvas: canvasReducers
+})
+export interface State extends StickiesState, CanvasState {}
 
 const store = createStore(reducer)
 

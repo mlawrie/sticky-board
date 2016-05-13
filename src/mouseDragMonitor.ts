@@ -23,7 +23,12 @@ export default class MouseDragMonitor {
         this.lastPosition = newPosition
     }
     
-     readonly mouseDown: MouseEventHandler = (ev) => {
+    readonly mouseLeave: MouseEventHandler = (ev) => {
+        this.dragging = false
+        this.lastPosition = makeVector(ev)
+    }
+    
+    readonly mouseDown: MouseEventHandler = (ev) => {
         this.dragging = true
         this.lastPosition = makeVector(ev)
     }
