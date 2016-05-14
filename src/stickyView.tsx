@@ -4,10 +4,8 @@ import { Sticky, modifySticky } from './sticky'
 import { Canvas } from './canvas'
 import { subscribe } from './subscribe'
 import { dispatch } from './reduxStore'
-import { updateStickyAction } from './actions'
+import { updateStickyAction, moveStickyToTop } from './actions'
  
-
-
 interface StickyViewState {
   sticky: Sticky
   canvas: Canvas
@@ -30,6 +28,11 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     }), this)
   }
   
+  _mouseDown(event:React.MouseEvent){
+    this.mouseDragMonitor.mouseDown(event)
+    dispatch(moveStickyToTop({uuid: this.props.uuid}));
+  }
+ 
   render() {
     console.log("ak:", this.state)
     const style = Object.assign({}, styles.container,
@@ -42,7 +45,7 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     return (
       <div
         style={style}
-        onMouseDown={this.mouseDragMonitor.mouseDown}
+        onMouseDown={this._mouseDown}
         onMouseUp={this.mouseDragMonitor.mouseUp}
         onMouseMove={this.mouseDragMonitor.mouseMove}
         onMouseLeave={this.mouseDragMonitor.mouseLeave}
