@@ -28,12 +28,13 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     }), this)
   }
   
-  _mouseDown(event:React.MouseEvent){
-    this.mouseDragMonitor.mouseDown(event)
-    dispatch(moveStickyToTop({uuid: this.props.uuid}));
-  }
- 
   render() {
+    
+    const mouseDown = (event:React.MouseEvent) => {
+      this.mouseDragMonitor.mouseDown(event)
+      dispatch(moveStickyToTop({uuid: this.props.uuid}));
+    }
+    
     const style = Object.assign({}, styles.container,
       {
         top: this.state.canvas.y + this.state.sticky.y,
@@ -44,7 +45,7 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     return (
       <div
         style={style}
-        onMouseDown={this._mouseDown}
+        onMouseDown={mouseDown}
         onMouseUp={this.mouseDragMonitor.mouseUp}
         onMouseMove={this.mouseDragMonitor.mouseMove}
         onMouseLeave={this.mouseDragMonitor.mouseLeave}
