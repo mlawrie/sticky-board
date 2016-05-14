@@ -17,8 +17,8 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
   constructor(props: any) {
     super(props)
     this.mouseDragMonitor = new MouseDragMonitor((delta) => {
-      let x = this.state.sticky.x + delta.x
-      let y = this.state.sticky.y + delta.y
+      const x = this.state.sticky.x + delta.x
+      const y = this.state.sticky.y + delta.y
       dispatch(updateStickyAction({uuid: this.props.uuid, x, y}))
     })
     
@@ -34,7 +34,6 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
   }
  
   render() {
-    console.log("ak:", this.state)
     const style = Object.assign({}, styles.container,
       {
         top: this.state.canvas.y + this.state.sticky.y,
@@ -70,7 +69,6 @@ const styles = {
     verticalAlign: 'middle',
     fontSize: 20,
     textAlign: 'center',
-    fontFamily: 'Comic Sans MS',
-    
+    fontFamily: 'Comic Sans MS'
   }
 };
