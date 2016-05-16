@@ -31,4 +31,15 @@ describe('mouseDragMonitor', () => {
     expect(callback.called).is.true
     expect(callback.calledWith({x: 15, y: 1})).is.true
   })
+  
+  it('should stop sending events when mouseup has been fired', () => {
+    const callback = sinon.stub()
+    const monitor = new MouseDragMonitor(callback)
+    monitor.mouseDown(makeMouseEvent())
+    monitor.mouseMove(makeMouseEvent())
+    monitor.mouseUp(makeMouseEvent())
+    monitor.mouseMove(makeMouseEvent())
+    expect(callback.calledOnce).is.true
+    expect(callback.calledTwice).is.false
+  })
 })
