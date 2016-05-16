@@ -7,27 +7,19 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info",
     "postinstall": "node_modules/.bin/typings install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-node ./node_modules/.bin/_mocha --opts testHelpers/mocha.opts"
   },
   "author": "Michael Lawrie <michael@michaellawrie.com>",
   "license": "MIT",
   "dependencies": {
     "chai": "^3.5.0",
-    "enzyme": "^2.2.0",
-    "immutable": "^3.7.6",
-    "mocha": "^2.4.5",
-    "react": "^15.0.2",
-    "react-addons-test-utils": "^15.0.2",
-    "react-dom": "^15.0.2",
-  "react-redux": "^4.4.4",
-    "react-router": "^2.4.0",
-    "react-router-redux": "^4.0.0",
-    "redux": "^3.5.2",
-    "redux-form": "^5.2.1",
-    "redux-thunk": "^2.0.1",
     "sinon": "^1.17.3",
-    "ts-loader": "^0.8.2",
+    "enzyme": "^2.2.0",
     "ts-node": "^0.7.2",
+    "mocha": "^2.4.5",
+    "sinon-chai": "",
+    
+    "ts-loader": "^0.8.2",
     "typescript": "1.9.0-dev.20160512",
     "typings": "^0.8.1",
     "webpack": "^1.13.0",
@@ -35,6 +27,14 @@
     "webpack-hot-middleware": "^2.9.1",
     "webpack-split-by-path": "0.0.8",
     "html-webpack-plugin": "^2.9.0",
+    
+    "immutable": "^3.7.6",
+    "react": "^15.0.2",
+    "react-addons-test-utils": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "react-redux": "^4.4.4",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.0.1",
     "node-uuid": "",
     "lodash": ""
   }

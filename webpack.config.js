@@ -23,7 +23,7 @@ module.exports = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js'],
+    extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js', '.test.js'],
   },
 
   module: {
@@ -31,7 +31,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts',
-        exclude: /(node_modules|test-utils|\.test\.ts$)/
+        exclude: /node_modules/
       }
     ],
   }

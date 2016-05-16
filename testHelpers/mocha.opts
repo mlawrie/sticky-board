@@ -1,0 +1,5 @@
+--compilers ts:ts-node/register
+--compilers tsx:ts-node/register
+--require ./testHelpers/testHelper.ts
+./src/*.test.ts
+
