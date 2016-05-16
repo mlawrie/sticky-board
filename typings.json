@@ -10,6 +10,7 @@
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#1c56e368e17bb28ca57577250624ca5bd561aa81",
     "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#f407264835650f5f38d4bb2c515a79e7a835916b",
     "react-dom": "github:DefinitelyTyped/DefinitelyTyped/react/react-dom.d.ts#ca5bfe76d2d9bf6852cbc712d9f3e0047c93486e",
-    "sinon": "registry:dt/sinon#1.16.0+20160317120654"
+    "sinon": "registry:dt/sinon#1.16.0+20160317120654",
+    "sinon-chai": "registry:dt/sinon-chai#2.7.0+20160317120654"
   }
 }

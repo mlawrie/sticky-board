@@ -1,6 +1,4 @@
-import { expect } from 'chai'
-import * as sinon from 'sinon'
-
+import { expect, sinon } from '../testHelpers/testHelper'
 import { MouseEvent } from 'react'
 import { makeMouseEvent } from '../testHelpers/makeMouseEvent'
 import MouseDragMonitor from './mouseDragMonitor'
@@ -11,7 +9,7 @@ describe('mouseDragMonitor', () => {
     const monitor = new MouseDragMonitor(callback)
     monitor.mouseDown(makeMouseEvent())
     monitor.mouseMove(makeMouseEvent())
-    expect(callback.called).is.true
+    expect(callback).to.have.been.called
   })
   
   it('should return mouse movement delta to callback', () => {
@@ -28,8 +26,8 @@ describe('mouseDragMonitor', () => {
     secondEvent.clientY = 6
     monitor.mouseMove(secondEvent)
     
-    expect(callback.called).is.true
-    expect(callback.calledWith({x: 15, y: 1})).is.true
+    expect(callback).is.called
+    expect(callback).is.calledWith({x: 15, y: 1})
   })
   
   it('should stop sending events when mouseup has been fired', () => {
@@ -39,7 +37,6 @@ describe('mouseDragMonitor', () => {
     monitor.mouseMove(makeMouseEvent())
     monitor.mouseUp(makeMouseEvent())
     monitor.mouseMove(makeMouseEvent())
-    expect(callback.calledOnce).is.true
-    expect(callback.calledTwice).is.false
+    expect(callback).is.calledOnce
   })
 })
