@@ -3,6 +3,7 @@ import {Sticky, modifySticky} from './sticky'
 import combine from './combine'
 import makeUuid = require('node-uuid')
 import Immutable = require('immutable')
+import lodash = require('lodash')
 
 type Stickies = Immutable.Map<string, Sticky>
 
@@ -32,7 +33,8 @@ export const stickiesReducers = (state: Stickies = Immutable.Map<string, Sticky>
     const sorted = otherUuids.map((uuid) => ({uuid, sticky: state.get(uuid)}))
         .sort((a, b) => a.sticky.z - b.sticky.z)
    
-    const assignZ = (sticky:Sticky) => modifySticky(sticky, {z: 1 + sorted.findIndex((el) => el.uuid === getUuuid(sticky))})
+    
+    const assignZ = (sticky:Sticky) => modifySticky(sticky, {z: 1 + lodash.findIndex(sorted, (el) => el.uuid === getUuuid(sticky))})
     
     return state.map(assignZ).toMap().set(action.payload.uuid, foregroundSticky)
   }

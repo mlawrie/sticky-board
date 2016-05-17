@@ -36,6 +36,7 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.0.1",
     "node-uuid": "",
-    "lodash": ""
+    "lodash": "",
+    "object-assign": ""
   }
 }

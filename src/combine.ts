@@ -1,1 +1,3 @@
-export default <T, U>(first: T, second: U) => Object.assign({}, first, second) as T & U
+import objectAssign = require('object-assign')
+
+export default <T, U>(first: T, second: U) => objectAssign({}, first, second) as T & U

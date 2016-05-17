@@ -5,6 +5,7 @@ import { Canvas } from './canvas'
 import { subscribe } from './subscribe'
 import { dispatch } from './reduxStore'
 import { updateStickyAction, moveStickyToTop } from './actions'
+import objectAssign = require('object-assign')
  
 interface StickyViewState {
   sticky: Sticky
@@ -35,7 +36,7 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
       dispatch(moveStickyToTop({uuid: this.props.uuid}));
     }
     
-    const style = Object.assign({}, styles.container,
+    const style = objectAssign({}, styles.container,
       {
         top: this.state.canvas.y + this.state.sticky.y,
         left: this.state.canvas.x + this.state.sticky.x,
