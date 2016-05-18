@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
-import StickyListView from './stickyListView'
-import CanvasView from './canvasView'
-import {getState, dispatch, subscribeToState} from './reduxStore'
+import StickyListView from 'sticky/stickyListView'
+import CanvasView from 'canvas/canvasView'
+import {getState, dispatch, subscribeToState} from 'state/reduxStore'
 import {createStickyAction} from 'state/actions'
 
 getState()

@@ -1,6 +1,6 @@
 import {isType, updateStickyAction, createStickyAction, moveStickyToTopAction, Action} from 'state/actions'
-import {Sticky, modifySticky} from './sticky'
-import combine from './combine'
+import {Sticky, modifySticky} from 'sticky/sticky'
+import combine from 'utils/combine'
 import makeUuid = require('node-uuid')
 import Immutable = require('immutable')
 import lodash = require('lodash')

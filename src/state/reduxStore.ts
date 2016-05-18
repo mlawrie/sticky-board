@@ -1,7 +1,7 @@
 import { createStore, combineReducers, Unsubscribe } from 'redux'
 import { Action } from 'state/actions'
-import { stickiesReducers, StickiesState } from './stickyReducers'
-import { canvasReducers, CanvasState } from './canvasReducers'
+import { stickiesReducers, StickiesState } from 'sticky/stickyReducers'
+import { canvasReducers, CanvasState } from 'canvas/canvasReducers'
 
 const reducer = combineReducers({
   stickies: stickiesReducers,

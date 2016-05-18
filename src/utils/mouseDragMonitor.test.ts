@@ -1,7 +1,7 @@
 import { expect, sinon } from 'testHelpers/testHelper'
 import { MouseEvent } from 'react'
 import { makeMouseEvent } from 'testHelpers/makeMouseEvent'
-import MouseDragMonitor from './mouseDragMonitor'
+import MouseDragMonitor from 'utils/mouseDragMonitor'
 
 describe('mouseDragMonitor', () => {
   it('should call callback when dragged', () => {

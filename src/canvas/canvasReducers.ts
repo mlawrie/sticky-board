@@ -1,4 +1,4 @@
-import {Canvas} from './canvas'
+import {Canvas} from 'canvas/canvas'
 import {isType, moveCanvasPositionAction, Action} from 'state/actions'
 
 let lastZ = 0

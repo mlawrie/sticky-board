@@ -26,8 +26,11 @@ module.exports = {
     root: __dirname,
     extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js', '.test.ts', '.test.tsx'],
     alias: {
-      state: './state',
-      testHelpers: './testHelpers'
+      state: 'src/state',
+      sticky: 'src/sticky',
+      canvas: 'src/canvas',
+      utils: 'src/utils',
+      testHelpers: 'src/testHelpers'
     }
   },
 

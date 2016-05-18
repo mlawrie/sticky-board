@@ -1,4 +1,4 @@
-import { getState, State, subscribeToState } from './reduxStore'
+import { getState, State, subscribeToState } from 'state/reduxStore'
 import { Component } from 'react'
 const lodash = require('lodash')
 

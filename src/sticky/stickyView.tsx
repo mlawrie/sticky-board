@@ -1,9 +1,9 @@
 import * as React from 'react'
-import MouseDragMonitor from './mouseDragMonitor'
-import { Sticky, modifySticky } from './sticky'
-import { Canvas } from './canvas'
-import { subscribe } from './subscribe'
-import { dispatch } from './reduxStore'
+import MouseDragMonitor from 'utils/mouseDragMonitor'
+import { Sticky, modifySticky } from 'sticky/sticky'
+import { Canvas } from 'canvas/canvas'
+import { subscribe } from 'state/subscribe'
+import { dispatch } from 'state/reduxStore'
 import { updateStickyAction, moveStickyToTopAction } from 'state/actions'
 import objectAssign = require('object-assign')
  

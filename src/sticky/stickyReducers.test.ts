@@ -1,5 +1,5 @@
 import { expect, sinon } from 'testHelpers/testHelper'
-import { stickiesReducers } from './stickyReducers'
+import { stickiesReducers } from 'sticky/stickyReducers'
 import { createStickyAction, updateStickyAction, moveStickyToTopAction } from 'state/actions'
 
 describe('stickyReducers', () => {

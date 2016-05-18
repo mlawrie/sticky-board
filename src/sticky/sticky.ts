@@ -1,4 +1,4 @@
-import immutablyModifyMap from './immutablyModifyMap'
+import immutablyModifyMap from 'utils/immutablyModifyMap'
 
 interface StickyMutator {
   x?: number
