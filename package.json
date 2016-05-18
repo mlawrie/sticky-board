@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "chai": "^3.5.0",
-    "sinon": "^1.17.3",
+    "sinon": "git+https://github.com/sinonjs/sinon.git",
     "enzyme": "^2.2.0",
     "ts-node": "^0.7.2",
     "mocha": "^2.4.5",
