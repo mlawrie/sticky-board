@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info",
     "postinstall": "node_modules/.bin/typings install",
-    "test": "karma start karma.config.js --single-run"
+    "test": "node_modules/karma/bin/karma start karma.config.js --single-run",
+    "test-watch": "node_modules/karma/bin/karma start karma.config.js"
   },
   "author": "Michael Lawrie <michael@michaellawrie.com>",
   "license": "MIT",
