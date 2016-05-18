@@ -1,5 +1,5 @@
 import {Canvas} from './canvas'
-import {isType, moveCanvasPositionAction, Action} from './actions'
+import {isType, moveCanvasPositionAction, Action} from 'state/actions'
 
 let lastZ = 0
 const nextZ = () => { lastZ += 1; return lastZ}    

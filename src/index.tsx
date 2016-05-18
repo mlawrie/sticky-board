@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom'
 import StickyListView from './stickyListView'
 import CanvasView from './canvasView'
 import {getState, dispatch, subscribeToState} from './reduxStore'
-import {createStickyAction} from './actions'
+import {createStickyAction} from 'state/actions'
 
 getState()
 dispatch(createStickyAction({x: 300, y: 300, body: "hi"}))

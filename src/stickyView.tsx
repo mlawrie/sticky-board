@@ -4,7 +4,7 @@ import { Sticky, modifySticky } from './sticky'
 import { Canvas } from './canvas'
 import { subscribe } from './subscribe'
 import { dispatch } from './reduxStore'
-import { updateStickyAction, moveStickyToTopAction } from './actions'
+import { updateStickyAction, moveStickyToTopAction } from 'state/actions'
 import objectAssign = require('object-assign')
  
 interface StickyViewState {

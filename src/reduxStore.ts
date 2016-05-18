@@ -1,5 +1,5 @@
 import { createStore, combineReducers, Unsubscribe } from 'redux'
-import { Action } from './actions'
+import { Action } from 'state/actions'
 import { stickiesReducers, StickiesState } from './stickyReducers'
 import { canvasReducers, CanvasState } from './canvasReducers'
 

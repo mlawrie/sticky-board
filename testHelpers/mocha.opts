@@ -1,4 +1,0 @@
---compilers ts:ts-node/register
---compilers tsx:ts-node/register
-./src/*.test.ts
-

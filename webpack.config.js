@@ -23,14 +23,19 @@ module.exports = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js', '.test.js'],
+    root: __dirname,
+    extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js', '.test.ts', '.test.tsx'],
+    alias: {
+      state: './state',
+      testHelpers: './testHelpers'
+    }
   },
 
   module: {
     loaders: [
       {
         test: /\.tsx?$/,
-        loader: 'ts',
+        loader: 'ts-loader',
         exclude: /node_modules/
       }
     ],

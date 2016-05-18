@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info",
     "postinstall": "node_modules/.bin/typings install",
-    "test": "ts-node ./node_modules/.bin/_mocha --opts testHelpers/mocha.opts"
+    "test": "karma start karma.config.js --single-run"
   },
   "author": "Michael Lawrie <michael@michaellawrie.com>",
   "license": "MIT",
@@ -17,9 +17,14 @@
     "enzyme": "^2.2.0",
     "ts-node": "^0.7.2",
     "mocha": "^2.4.5",
+    "karma": "",
     "sinon-chai": "",
+    "karma-webpack": "",
+    "karma-phantomjs-launcher": "",
+    "karma-mocha": "",
+    "phantomjs-prebuilt": "",
+    "webpack-config": "",
     
-    "ts-loader": "^0.8.2",
     "typescript": "1.9.0-dev.20160512",
     "typings": "^0.8.1",
     "webpack": "^1.13.0",

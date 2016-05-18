@@ -1,6 +1,6 @@
-import { expect, sinon } from '../testHelpers/testHelper'
+import { expect, sinon } from 'testHelpers/testHelper'
 import { MouseEvent } from 'react'
-import { makeMouseEvent } from '../testHelpers/makeMouseEvent'
+import { makeMouseEvent } from 'testHelpers/makeMouseEvent'
 import MouseDragMonitor from './mouseDragMonitor'
 
 describe('mouseDragMonitor', () => {

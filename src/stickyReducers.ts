@@ -1,4 +1,4 @@
-import {isType, updateStickyAction, createStickyAction, moveStickyToTopAction, Action} from './actions'
+import {isType, updateStickyAction, createStickyAction, moveStickyToTopAction, Action} from 'state/actions'
 import {Sticky, modifySticky} from './sticky'
 import combine from './combine'
 import makeUuid = require('node-uuid')
