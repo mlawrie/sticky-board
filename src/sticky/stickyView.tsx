@@ -5,7 +5,7 @@ import combine from 'utils/combine'
 import { Canvas } from 'canvas/canvas'
 import { subscribe } from 'state/subscribe'
 import { dispatch } from 'state/reduxStore'
-import { updateStickyAction, moveStickyToTopAction } from 'state/actions'
+import { updateStickyAction, moveStickyToTopAction, removeStickyAction } from 'state/actions'
 import { CloseButton } from 'sticky/closeButton'
 import { HoverMonitorView } from 'utils/hoverMonitorView'
  
@@ -26,6 +26,10 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
   }
   
   render() {
+    if (!this.state.sticky) {
+      return <div/>
+    }
+    
     const onDrag = (delta: {x: number, y: number}) => {
       const x = this.state.sticky.x + delta.x
       const y = this.state.sticky.y + delta.y
@@ -46,7 +50,8 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
         <MouseDragMonitorView onDragged={onDrag}>
           <div style={style} onMouseDown={onMouseDown}>
             <div style={styles.inside}>{this.state.sticky.body}</div>
-            <CloseButton visible={this.state.sticky.hovered} onClosePressed={() => {}}/>
+            <CloseButton visible={this.state.sticky.hovered}
+              onClosePressed={() => dispatch(removeStickyAction({uuid: this.props.uuid}))}/>
           </div>
         </MouseDragMonitorView>
       </HoverMonitorView>
@@ -70,4 +75,4 @@ const styles = {
     textAlign: 'center',
     fontFamily: 'Comic Sans MS'
   }
-};
+}

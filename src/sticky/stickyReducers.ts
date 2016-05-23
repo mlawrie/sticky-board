@@ -1,4 +1,4 @@
-import {isType, updateStickyAction, createStickyAction, moveStickyToTopAction, Action} from 'state/actions'
+import {isType, updateStickyAction, createStickyAction, moveStickyToTopAction, removeStickyAction, Action} from 'state/actions'
 import {Sticky, modifySticky} from 'sticky/sticky'
 import combine from 'utils/combine'
 import makeUuid = require('node-uuid')
@@ -37,6 +37,10 @@ export const stickiesReducers = (state: Stickies = Immutable.Map<string, Sticky>
     const assignZ = (sticky:Sticky) => modifySticky(sticky, {z: 1 + lodash.findIndex(sorted, (el) => el.uuid === getUuuid(sticky))})
     
     return state.map(assignZ).toMap().set(action.payload.uuid, foregroundSticky)
+  }
+  
+  if (isType(action, removeStickyAction)) {
+    return state.filter((value, key) => key != action.payload.uuid).toMap()
   }
   
   return state

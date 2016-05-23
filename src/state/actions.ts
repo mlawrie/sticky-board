@@ -20,3 +20,4 @@ export const createStickyAction = actionCreator<{x: number, y: number, body: str
 export const moveCanvasPositionAction = actionCreator<{x: number, y: number}>('UPDATE_CANVAS_POSITION')
 export const updateStickyAction = actionCreator<{x?: number, y?: number, hovered?:boolean, uuid: string}>('UPDATE_STICKY')
 export const moveStickyToTopAction = actionCreator<{uuid: string}>('MOVE_STICKY_TO_TOP')
+export const removeStickyAction = actionCreator<{uuid: string}>('REMOVE_STICKY')

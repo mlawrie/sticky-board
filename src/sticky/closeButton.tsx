@@ -11,9 +11,7 @@ export class CloseButton extends React.Component<CloseButtonProps, {}> {
       return <div/>
     }
     return (
-      <div style={style} onClick={() => this.props.onClosePressed()}>
-        X
-      </div>
+      <div style={style} onClick={() => this.props.onClosePressed()}>X</div>
     )
   }
 }

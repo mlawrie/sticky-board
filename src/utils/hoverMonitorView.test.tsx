@@ -1,16 +1,15 @@
-import { expect, sinon } from 'testHelpers/testHelper'
+import { expect, sinon, inject } from 'testHelpers/testHelper'
 import { shallow } from 'enzyme'
 import * as React from 'react'
 import { makeMouseEvent } from 'testHelpers/makeMouseEvent'
 import { HoverMonitorView } from 'utils/hoverMonitorView'
-import { injectMock } from 'utils/injector'
 import { Timer } from 'utils/timer'
 
 describe('HoverMonitorView', () => {
   beforeEach(() => {
     const timer = new Timer();
     sinon.stub(timer, 'setTimeout').yields()
-    injectMock(() => new Timer(), () => timer)
+    inject(() => new Timer(), () => timer)
   })
   
   it('should call callback when hovered', () => {

@@ -1,6 +1,6 @@
 import { expect, sinon } from 'testHelpers/testHelper'
 import { stickiesReducers } from 'sticky/stickyReducers'
-import { createStickyAction, updateStickyAction, moveStickyToTopAction } from 'state/actions'
+import { createStickyAction, updateStickyAction, moveStickyToTopAction, removeStickyAction } from 'state/actions'
 
 describe('stickyReducers', () => {
   describe('createStickyAction', () => {
@@ -35,6 +35,16 @@ describe('stickyReducers', () => {
       const uuid = state1.keySeq().first()
       const state2 = stickiesReducers(state1, updateStickyAction({hovered: true, uuid}))
       expect(state2.get(uuid).hovered).to.eql(true)
+    })
+  })
+  
+  describe('removeStickyAction', () => {
+    it('removes only the target sticky', () => {
+      let state = stickiesReducers(undefined, createStickyAction({x: 10, y: 20, body: 'i am sticky'}))
+      const uuid = state.keySeq().first()
+      state = stickiesReducers(state, createStickyAction({x: 10, y: 20, body: 'i am sticky 2'}))
+      state = stickiesReducers(state, removeStickyAction({uuid}))
+      expect(state.count()).to.eql(1)
     })
   })
   
