@@ -10,7 +10,7 @@ const makeVector = (ev:React.MouseEvent) => ({x: ev.clientX, y: ev.clientY})
 
 interface MouseDragMonitorViewProps {
     readonly onDragged: (v:Vector) => void
-    readonly children?:Element
+    readonly children?: Element[]
 } 
 
 export default class MouseDragMonitorView extends React.Component<MouseDragMonitorViewProps, {}> {

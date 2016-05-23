@@ -1,11 +1,11 @@
 import * as React from 'react'
 import MouseDragMonitorView from 'utils/mouseDragMonitorView'
 import { Sticky, modifySticky } from 'sticky/sticky'
+import combine from 'utils/combine'
 import { Canvas } from 'canvas/canvas'
 import { subscribe } from 'state/subscribe'
 import { dispatch } from 'state/reduxStore'
 import { updateStickyAction, moveStickyToTopAction } from 'state/actions'
-import objectAssign = require('object-assign')
 import { CloseButton } from 'sticky/closeButton'
 import { HoverMonitorView } from 'utils/hoverMonitorView'
  
@@ -31,14 +31,10 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
       const y = this.state.sticky.y + delta.y
       dispatch(updateStickyAction({uuid: this.props.uuid, x, y}))
     }
+    const onHover = (hovered:boolean) => dispatch(updateStickyAction({uuid: this.props.uuid, hovered}))
+    const onMouseDown = (event:React.MouseEvent) => dispatch(moveStickyToTopAction({uuid: this.props.uuid}))
     
-    const hover = (hovered:boolean) => dispatch(updateStickyAction({uuid: this.props.uuid, hovered}))
-    
-    const mouseDown = (event:React.MouseEvent) => {
-      dispatch(moveStickyToTopAction({uuid: this.props.uuid}));
-    }
-    
-    const style = objectAssign({}, styles.container,
+    const style = combine(styles.container,
       {
         top: this.state.canvas.y + this.state.sticky.y,
         left: this.state.canvas.x + this.state.sticky.x,
@@ -46,9 +42,9 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
       })
 
     return (
-      <HoverMonitorView entryLatency={300} exitLatency={300} onHoverChange={hover}>
+      <HoverMonitorView entryLatency={300} exitLatency={300} onHoverChange={onHover}>
         <MouseDragMonitorView onDragged={onDrag}>
-          <div style={style} onMouseDown={mouseDown}>
+          <div style={style} onMouseDown={onMouseDown}>
             <div style={styles.inside}>{this.state.sticky.body}</div>
             <CloseButton visible={this.state.sticky.hovered} onClosePressed={() => {}}/>
           </div>
