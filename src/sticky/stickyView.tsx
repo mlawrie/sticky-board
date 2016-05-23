@@ -1,5 +1,5 @@
 import * as React from 'react'
-import MouseDragMonitorView from 'utils/mouseDragMonitorView'
+import { MouseDragMonitorView } from 'utils/mouseDragMonitorView'
 import { Sticky, modifySticky } from 'sticky/sticky'
 import combine from 'utils/combine'
 import { Canvas } from 'canvas/canvas'

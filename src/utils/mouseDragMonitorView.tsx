@@ -7,18 +7,23 @@ interface Vector {
   readonly y: number
 }
 
+export interface DragEvent {
+    readonly clientX: number
+    readonly clientY: number
+}
+
 const subtract = (v1:Vector, v2: Vector) => ({x: v1.x - v2.x, y: v1.y - v2.y})
-const makeVector = (ev: {clientX: number, clientY: number}) => ({x: ev.clientX, y: ev.clientY})
+const makeVector = (ev: DragEvent) => ({x: ev.clientX, y: ev.clientY})
 
 interface MouseDragMonitorViewProps {
     readonly onDragged: (v:Vector) => void
     readonly children?: Element[]
 }
 
-export default class MouseDragMonitorView extends React.Component<MouseDragMonitorViewProps, {}> {
+export class MouseDragMonitorView extends React.Component<MouseDragMonitorViewProps, {}> {
     private lastPosition: Vector
     
-    mouseDown(ev: React.MouseEvent) {
+    mouseDown(ev: DragEvent) {
         const eventListener = mockable(() => new BodyEventListener()) 
         this.lastPosition = makeVector(ev)
         

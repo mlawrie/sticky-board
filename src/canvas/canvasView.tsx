@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { dispatch } from 'state/reduxStore'
 import { moveCanvasPositionAction } from 'state/actions'
-import MouseDragMonitorView from 'utils/mouseDragMonitorView'
+import { MouseDragMonitorView } from 'utils/mouseDragMonitorView'
 
 class Canvas extends React.Component<{}, {}> {
   render() {
