@@ -1,5 +1,5 @@
 import * as React from 'react'
-import MouseDragMonitor from 'utils/mouseDragMonitor'
+import MouseDragMonitorView from 'utils/mouseDragMonitorView'
 import { Sticky, modifySticky } from 'sticky/sticky'
 import { Canvas } from 'canvas/canvas'
 import { subscribe } from 'state/subscribe'
@@ -15,15 +15,9 @@ interface StickyViewState {
 }
 
 export default class StickyView extends React.Component<{uuid: string}, StickyViewState> {
-  private mouseDragMonitor:MouseDragMonitor
   
   constructor(props: any) {
     super(props)
-    this.mouseDragMonitor = new MouseDragMonitor((delta) => {
-      const x = this.state.sticky.x + delta.x
-      const y = this.state.sticky.y + delta.y
-      dispatch(updateStickyAction({uuid: this.props.uuid, x, y}))
-    })
     
     subscribe<StickyViewState>((state) => ({
       sticky: state.stickies.get(this.props.uuid),
@@ -32,10 +26,15 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
   }
   
   render() {
+    const onDrag = (delta: {x: number, y: number}) => {
+      const x = this.state.sticky.x + delta.x
+      const y = this.state.sticky.y + delta.y
+      dispatch(updateStickyAction({uuid: this.props.uuid, x, y}))
+    }
+    
     const hover = (hovered:boolean) => dispatch(updateStickyAction({uuid: this.props.uuid, hovered}))
     
     const mouseDown = (event:React.MouseEvent) => {
-      this.mouseDragMonitor.mouseDown(event)
       dispatch(moveStickyToTopAction({uuid: this.props.uuid}));
     }
     
@@ -48,18 +47,14 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
 
     return (
       <HoverMonitorView entryLatency={300} exitLatency={300} onHoverChange={hover}>
-        <div
-          style={style}
-          onMouseDown={mouseDown}
-          onMouseUp={this.mouseDragMonitor.mouseUp}
-          onMouseMove={this.mouseDragMonitor.mouseMove}
-          onMouseLeave={this.mouseDragMonitor.mouseLeave}
-          >
-          <div style={styles.inside}>{this.state.sticky.body}</div>
-          <CloseButton visible={this.state.sticky.hovered} onClosePressed={() => {}}/>
-        </div>
-       </HoverMonitorView>
-    );
+        <MouseDragMonitorView onDragged={onDrag}>
+          <div style={style} onMouseDown={mouseDown}>
+            <div style={styles.inside}>{this.state.sticky.body}</div>
+            <CloseButton visible={this.state.sticky.hovered} onClosePressed={() => {}}/>
+          </div>
+        </MouseDragMonitorView>
+      </HoverMonitorView>
+    )
   }
 }
 
