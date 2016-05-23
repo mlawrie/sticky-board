@@ -1,10 +1,11 @@
 import immutablyModifyMap from 'utils/immutablyModifyMap'
 
 interface StickyMutator {
-  x?: number
-  y?: number
-  z?: number
-  body?: string
+  readonly x?: number
+  readonly y?: number
+  readonly z?: number
+  readonly body?: string
+  readonly hovered?: boolean
 }
 
 export interface Sticky {
@@ -12,6 +13,7 @@ export interface Sticky {
   readonly y: number
   readonly z: number
   readonly body: string
+  readonly hovered: boolean
 }
 
 export const modifySticky = immutablyModifyMap<Sticky, StickyMutator>()

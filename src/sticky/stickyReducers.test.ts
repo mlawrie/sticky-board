@@ -29,6 +29,13 @@ describe('stickyReducers', () => {
       expect(state2.get(uuid).y).to.eql(0)
       expect(state2.get(uuid).body).to.eql('i am sticky')
     })
+    
+    it("modifies a sticky's hover state", () => {
+      const state1 = stickiesReducers(undefined, createStickyAction({x: 10, y: 20, body: 'i am sticky'}))
+      const uuid = state1.keySeq().first()
+      const state2 = stickiesReducers(state1, updateStickyAction({hovered: true, uuid}))
+      expect(state2.get(uuid).hovered).to.eql(true)
+    })
   })
   
   describe('moveStickyToTopAction', () => {

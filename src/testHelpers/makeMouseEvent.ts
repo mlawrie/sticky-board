@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react'
 
 export const makeMouseEvent = ():__React.MouseEvent => {
-return {
+return <any>{
   altKey: null,
   bubbles: null,
   cancelable: null,

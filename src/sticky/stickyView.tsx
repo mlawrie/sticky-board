@@ -6,6 +6,8 @@ import { subscribe } from 'state/subscribe'
 import { dispatch } from 'state/reduxStore'
 import { updateStickyAction, moveStickyToTopAction } from 'state/actions'
 import objectAssign = require('object-assign')
+import { CloseButton } from 'sticky/closeButton'
+import { HoverMonitorView } from 'utils/hoverMonitorView'
  
 interface StickyViewState {
   sticky: Sticky
@@ -30,6 +32,7 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
   }
   
   render() {
+    const hover = (hovered:boolean) => dispatch(updateStickyAction({uuid: this.props.uuid, hovered}))
     
     const mouseDown = (event:React.MouseEvent) => {
       this.mouseDragMonitor.mouseDown(event)
@@ -44,15 +47,18 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
       })
 
     return (
-      <div
-        style={style}
-        onMouseDown={mouseDown}
-        onMouseUp={this.mouseDragMonitor.mouseUp}
-        onMouseMove={this.mouseDragMonitor.mouseMove}
-        onMouseLeave={this.mouseDragMonitor.mouseLeave}
-        >
-        <div style={styles.inside}>{this.state.sticky.body}</div>
-      </div>
+      <HoverMonitorView entryLatency={300} exitLatency={300} onHoverChange={hover}>
+        <div
+          style={style}
+          onMouseDown={mouseDown}
+          onMouseUp={this.mouseDragMonitor.mouseUp}
+          onMouseMove={this.mouseDragMonitor.mouseMove}
+          onMouseLeave={this.mouseDragMonitor.mouseLeave}
+          >
+          <div style={styles.inside}>{this.state.sticky.body}</div>
+          <CloseButton visible={this.state.sticky.hovered} onClosePressed={() => {}}/>
+        </div>
+       </HoverMonitorView>
     );
   }
 }
