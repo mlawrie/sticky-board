@@ -7,11 +7,13 @@ import { injectMock } from 'utils/injector'
 import { Timer } from 'utils/timer'
 
 describe('HoverMonitorView', () => {
-  it('should call callback when hovered', () => {
+  beforeEach(() => {
     const timer = new Timer();
     sinon.stub(timer, 'setTimeout').yields()
     injectMock(() => new Timer(), () => timer)
-    
+  })
+  
+  it('should call callback when hovered', () => {
     const stub = sinon.stub()
     const wrapper = shallow(<HoverMonitorView entryLatency={0} exitLatency={0} onHoverChange={stub}/>)
     wrapper.get(0).props.onMouseOver()
@@ -19,10 +21,6 @@ describe('HoverMonitorView', () => {
   })
   
   it('should call callback with false when unhovered', () => {
-    const timer = new Timer();
-    sinon.stub(timer, 'setTimeout').yields()
-    injectMock(() => new Timer(), () => timer)
-    
     const stub = sinon.stub()
     const wrapper = shallow(<HoverMonitorView entryLatency={0} exitLatency={0} onHoverChange={stub}/>)
     wrapper.get(0).props.onMouseOver()
