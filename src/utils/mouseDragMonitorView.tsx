@@ -14,23 +14,26 @@ export interface DragEvent {
 
 const subtract = (v1:Vector, v2: Vector) => ({x: v1.x - v2.x, y: v1.y - v2.y})
 const makeVector = (ev: DragEvent) => ({x: ev.clientX, y: ev.clientY})
+const distance = (v1:Vector, v2:Vector) => Math.sqrt(Math.pow(v2.x - v1.x, 2) + Math.pow(v2.y - v1.y, 2))
 
 interface MouseDragMonitorViewProps {
     readonly onDragged: (v:Vector) => void
+    readonly threshold: number
     readonly children?: Element[]
 }
 
 export class MouseDragMonitorView extends React.Component<MouseDragMonitorViewProps, {}> {
-    private lastPosition: Vector
-    
     mouseDown(ev: DragEvent) {
         const eventListener = mockable(() => new BodyEventListener()) 
-        this.lastPosition = makeVector(ev)
+        let lastPosition = makeVector(ev)
+        const initialPosition = makeVector(ev)
         
         const mouseMove = (ev: MouseEvent) => {
-            let newPosition = makeVector(ev)
-            this.props.onDragged(subtract(newPosition, this.lastPosition))
-            this.lastPosition = newPosition
+            const newPosition = makeVector(ev)
+            if (distance(newPosition, initialPosition) >= this.props.threshold) {
+                this.props.onDragged(subtract(newPosition, lastPosition))
+                lastPosition = newPosition    
+            }
         }
         
         const cleanup = () => {

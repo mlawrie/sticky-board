@@ -19,7 +19,7 @@ describe('mouseDragMonitor', () => {
   
   it('should call callback when dragged', () => {
     const callback = sinon.stub()
-    const wrapper = shallow(<MouseDragMonitorView onDragged={callback}/>)
+    const wrapper = shallow(<MouseDragMonitorView onDragged={callback} threshold={0}/>)
     wrapper.get(0).props.onMouseDown({clientX: 5, clientY: 5})
     eventListeners['mousemove']({clientX: 5, clientY: 5})
     expect(callback).to.have.been.called
@@ -27,7 +27,7 @@ describe('mouseDragMonitor', () => {
   
   it('should return mouse movement delta to callback', () => {
     const callback = sinon.stub()
-    const wrapper = shallow(<MouseDragMonitorView onDragged={callback}/>)
+    const wrapper = shallow(<MouseDragMonitorView onDragged={callback} threshold={0}/>)
     
     wrapper.get(0).props.onMouseDown({clientX: 5, clientY: 5})
     eventListeners['mousemove']({clientX: 20, clientY: 6})
@@ -37,12 +37,20 @@ describe('mouseDragMonitor', () => {
   
   it('should unregister from events when mouseup has been fired', () => {
     const stub = sinon.stub(mockBodyEventListener, 'remove')
-    const wrapper = shallow(<MouseDragMonitorView onDragged={() => {}}/>)
+    const wrapper = shallow(<MouseDragMonitorView onDragged={() => {}}  threshold={0}/>)
     wrapper.get(0).props.onMouseDown({clientX: 5, clientY: 5})
     eventListeners['mouseup']({clientX: 5, clientY: 5})
     expect(stub).to.have.been.calledWith('mouseup')
     expect(stub).to.have.been.calledWith('mousemove')
     expect(stub).to.have.been.calledWith('mouseleave')
-    
   })
+  
+  it('does not trigger callback if treshold is not exceeded', () => {
+    const callback = sinon.stub()
+    const wrapper = shallow(<MouseDragMonitorView onDragged={callback} threshold={5}/>)
+    wrapper.get(0).props.onMouseDown({clientX: 5, clientY: 5})
+    eventListeners['mousemove']({clientX: 6, clientY: 6})
+    expect(callback).to.not.have.been.called
+  })
+  
 })

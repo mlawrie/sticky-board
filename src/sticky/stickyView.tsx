@@ -47,7 +47,7 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
 
     return (
       <HoverMonitorView entryLatency={300} exitLatency={300} onHoverChange={onHover}>
-        <MouseDragMonitorView onDragged={onDrag}>
+        <MouseDragMonitorView onDragged={onDrag} threshold={10}>
           <div style={style} onMouseDown={onMouseDown}>
             <div style={styles.inside}>{this.state.sticky.body}</div>
             <CloseButton visible={this.state.sticky.hovered}
