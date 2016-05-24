@@ -18,6 +18,7 @@ const distance = (v1:Vector, v2:Vector) => Math.sqrt(Math.pow(v2.x - v1.x, 2) + 
 
 interface MouseDragMonitorViewProps {
     readonly onDragged: (v:Vector) => void
+    readonly onClicked: () => void
     readonly threshold: number
     readonly children?: Element[]
 }
@@ -42,8 +43,15 @@ export class MouseDragMonitorView extends React.Component<MouseDragMonitorViewPr
             eventListener.remove('mousemove', mouseMove)
         }
         
+        const mouseUp = (ev:MouseEvent) => {
+            if (distance(makeVector(ev), initialPosition) < this.props.threshold) {
+                this.props.onClicked()    
+            }
+            cleanup()    
+        } 
+        
         eventListener.add('mousemove', mouseMove)
-        eventListener.add('mouseup', cleanup)
+        eventListener.add('mouseup', mouseUp)
         eventListener.add('mouseleave', cleanup)
     }
     

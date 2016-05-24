@@ -6,6 +6,7 @@ interface StickyMutator {
   readonly z?: number
   readonly body?: string
   readonly hovered?: boolean
+  readonly editing?: boolean
 }
 
 export interface Sticky {
@@ -14,6 +15,7 @@ export interface Sticky {
   readonly z: number
   readonly body: string
   readonly hovered: boolean
+  readonly editing: boolean
 }
 
 export const modifySticky = immutablyModifyMap<Sticky, StickyMutator>()
