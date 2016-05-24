@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { MouseDragMonitorView } from 'utils/mouseDragMonitorView'
+import { GestureRecognizerView } from 'utils/gestureRecognizerView'
 import { Sticky, modifySticky } from 'sticky/sticky'
 import combine from 'utils/combine'
 import { Canvas } from 'canvas/canvas'
@@ -47,13 +47,13 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
 
     return (
       <HoverMonitorView entryLatency={300} exitLatency={300} onHoverChange={onHover}>
-        <MouseDragMonitorView onDragged={onDrag} onClicked={() => {console.log('clicked: ', this.state.sticky.body)}} threshold={10}>
+        <GestureRecognizerView onDragged={onDrag} onClicked={() => {console.log('clicked: ', this.state.sticky.body)}} threshold={10}>
           <div style={style} onMouseDown={onMouseDown}>
             <div style={styles.inside}>{this.state.sticky.body}</div>
             <CloseButton visible={this.state.sticky.hovered}
               onClosePressed={() => dispatch(removeStickyAction({uuid: this.props.uuid}))}/>
           </div>
-        </MouseDragMonitorView>
+        </GestureRecognizerView>
       </HoverMonitorView>
     )
   }
