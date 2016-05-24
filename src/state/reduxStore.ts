@@ -9,8 +9,9 @@ const reducer = combineReducers({
 })
 export interface State extends StickiesState, CanvasState {}
 
-const store = createStore(reducer)
+let store = createStore(reducer)
 
 export const getState = () => store.getState() as State
 export const dispatch = (a:Action<any>) => store.dispatch(a)
 export const subscribeToState = (callback: () => void) => store.subscribe(callback)
+export const resetReduxForTests = () => store = createStore(reducer) 

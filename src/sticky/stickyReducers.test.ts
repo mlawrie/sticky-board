@@ -30,11 +30,25 @@ describe('stickyReducers', () => {
       expect(state2.get(uuid).body).to.eql('i am sticky')
     })
     
-    it("modifies a sticky's hover state", () => {
+    it("modifies a sticky's editing state", () => {
       const state1 = stickiesReducers(undefined, createStickyAction({x: 10, y: 20, body: 'i am sticky'}))
       const uuid = state1.keySeq().first()
-      const state2 = stickiesReducers(state1, updateStickyAction({hovered: true, uuid}))
-      expect(state2.get(uuid).hovered).to.eql(true)
+      const state2 = stickiesReducers(state1, updateStickyAction({editing: true, uuid}))
+      expect(state2.get(uuid).editing).to.eql(true)
+    })
+    
+    it("sets other stickies to not edited", () => {
+      let state = stickiesReducers(undefined, createStickyAction({x: 10, y: 20, body: 'first'}))
+      state = stickiesReducers(state, createStickyAction({x: 10, y: 20, body: 'second'}))
+      state = stickiesReducers(state, updateStickyAction({editing: true, uuid: state.keySeq().last()}))
+      expect(state.get(state.keySeq().first()).editing).to.eql(false)
+    })
+    
+    it("does not set self to not edited", () => {
+      let state = stickiesReducers(undefined, createStickyAction({x: 10, y: 20, body: 'first'}))
+      state = stickiesReducers(state, updateStickyAction({editing: true, uuid: state.keySeq().last()}))
+      state = stickiesReducers(state, updateStickyAction({uuid: state.keySeq().last()}))
+      expect(state.get(state.keySeq().first()).editing).to.eql(true)
     })
   })
   

@@ -5,7 +5,6 @@ interface StickyMutator {
   readonly y?: number
   readonly z?: number
   readonly body?: string
-  readonly hovered?: boolean
   readonly editing?: boolean
 }
 
@@ -14,7 +13,6 @@ export interface Sticky {
   readonly y: number
   readonly z: number
   readonly body: string
-  readonly hovered: boolean
   readonly editing: boolean
 }
 

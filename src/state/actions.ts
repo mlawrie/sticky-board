@@ -18,6 +18,6 @@ export const isType = <T>(action: Action<any>, actionCreator: ActionCreator<T>):
 
 export const createStickyAction = actionCreator<{x: number, y: number, body: string}>('CREATE_STICKY')
 export const moveCanvasPositionAction = actionCreator<{x: number, y: number}>('UPDATE_CANVAS_POSITION')
-export const updateStickyAction = actionCreator<{x?: number, y?: number, hovered?:boolean, uuid: string, editing?: boolean}>('UPDATE_STICKY')
+export const updateStickyAction = actionCreator<{x?: number, y?: number, uuid: string, editing?: boolean, body?: string}>('UPDATE_STICKY')
 export const moveStickyToTopAction = actionCreator<{uuid: string}>('MOVE_STICKY_TO_TOP')
 export const removeStickyAction = actionCreator<{uuid: string}>('REMOVE_STICKY')

@@ -7,7 +7,6 @@ import { subscribe } from 'state/subscribe'
 import { dispatch } from 'state/reduxStore'
 import { updateStickyAction, moveStickyToTopAction, removeStickyAction } from 'state/actions'
 import { CloseButton } from 'sticky/closeButton'
-import { HoverMonitorView } from 'utils/hoverMonitorView'
  
 interface StickyViewState {
   sticky: Sticky
@@ -25,6 +24,16 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     }), this)
   }
   
+  renderStickyLabel() {
+    if (this.state.sticky.editing) {
+      const onChange = (e:React.SyntheticEvent) => dispatch(updateStickyAction({uuid: this.props.uuid, body: (e.target as any).value}))
+      return <span>
+        <textarea onChange={(onChange)} rows={3} autoFocus style={styles.inside} type="text" value={this.state.sticky.body}/>
+      </span>  
+    }
+    return <div style={styles.inside}>{this.state.sticky.body}</div>
+  }
+
   render() {
     if (!this.state.sticky) {
       return <div/>
@@ -33,46 +42,57 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     const onDrag = (delta: {x: number, y: number}) => {
       const x = this.state.sticky.x + delta.x
       const y = this.state.sticky.y + delta.y
-      dispatch(updateStickyAction({uuid: this.props.uuid, x, y}))
+      dispatch(updateStickyAction({uuid: this.props.uuid, x, y, editing: false}))
     }
-    const onHover = (hovered:boolean) => dispatch(updateStickyAction({uuid: this.props.uuid, hovered}))
     const onMouseDown = (event:React.MouseEvent) => dispatch(moveStickyToTopAction({uuid: this.props.uuid}))
     
     const style = combine(styles.container,
       {
         top: this.state.canvas.y + this.state.sticky.y,
         left: this.state.canvas.x + this.state.sticky.x,
-        zIndex: this.state.sticky.z
+        zIndex: this.state.sticky.z,
+        backgroundColor: this.state.sticky.editing ? '#ffa' : '#ff0'
       })
 
     return (
-      <HoverMonitorView entryLatency={300} exitLatency={300} onHoverChange={onHover}>
-        <GestureRecognizerView onDragged={onDrag} onClicked={() => {console.log('clicked: ', this.state.sticky.body)}} threshold={10}>
-          <div style={style} onMouseDown={onMouseDown}>
-            <div style={styles.inside}>{this.state.sticky.body}</div>
-            <CloseButton visible={this.state.sticky.hovered}
-              onClosePressed={() => dispatch(removeStickyAction({uuid: this.props.uuid}))}/>
-          </div>
-        </GestureRecognizerView>
-      </HoverMonitorView>
+      <GestureRecognizerView
+        onDragged={onDrag}
+        onClicked={() => dispatch(updateStickyAction({uuid: this.props.uuid, editing: true}))}
+        threshold={10}>
+        <div style={style} onMouseDown={onMouseDown}>
+          {this.renderStickyLabel()}
+          <CloseButton visible={this.state.sticky.editing}
+            onClosePressed={() => dispatch(removeStickyAction({uuid: this.props.uuid}))}/>
+        </div>
+      </GestureRecognizerView>
     )
   }
 }
 
 const styles = {
   container: {
+    boxSizing: 'border-box',
     position: 'absolute',
-    backgroundColor: '#ffff00',
     border: '1px solid #ee0',
-    width: 180,
+    width: 182,
     height: 120,
-    display: 'table'
+    padding: 10
   },
   inside: {
-    display: 'table-cell',
-    verticalAlign: 'middle',
     fontSize: 20,
-    textAlign: 'center',
-    fontFamily: 'Comic Sans MS'
+    margin: 0,
+    padding: 0,
+    resize: 'none',
+    width: '100%',
+    height: '100%',
+    border: 'none',
+    background: 'transparent',
+    textAlign: 'left',
+    fontFamily: 'Comic Sans MS',
+    overflow: 'hidden',
+    outline: 'none',
+    WebkitBoxShadow: 'none',
+    MozBoxShadow: 'none',
+    boxShadow: 'none'
   }
 }

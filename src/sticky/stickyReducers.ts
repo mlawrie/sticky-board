@@ -11,23 +11,24 @@ export interface StickiesState {
   readonly stickies: Stickies 
 }
 
+const markNotEdited = (sticky:Sticky) => modifySticky(sticky, {editing: false})
+
 export const stickiesReducers = (state: Stickies = Immutable.Map<string, Sticky>(), action: Action<any>): Stickies => {
   const getUuuid = (sticky:Sticky) => state.keyOf(sticky)
   
   if (isType(action, createStickyAction)) {
-    const foregroundSticky = combine(action.payload, {z: state.size + 1, hovered: false, editing: false})
-    return state.set(makeUuid.v1(), foregroundSticky)
+    const sticky = combine(action.payload, {z: state.size + 1, editing: false})
+    return state.set(makeUuid.v1(), sticky)
   }
    
   if (isType(action, updateStickyAction)) {
-    const existingSticky = state.get(action.payload.uuid)
-    const foregroundSticky = modifySticky(existingSticky, {
+    const sticky = modifySticky(state.get(action.payload.uuid), {
       x: action.payload.x,
       y: action.payload.y,
-      hovered: action.payload.hovered,
-      editing: action.payload.editing
+      editing: action.payload.editing,
+      body: action.payload.body
     })
-    return state.set(action.payload.uuid, foregroundSticky)
+    return state.map(markNotEdited).toMap().set(action.payload.uuid, sticky)
   }
   
   if (isType(action, moveStickyToTopAction)) {
