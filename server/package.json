@@ -1,0 +1,36 @@
+{
+  "name": "sticky-board-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node_modules/.bin/typings install",
+    "buildRun": "node_modules/.bin/tsc; cp knexfile.js dist/; cd dist/; node app.js"
+  },
+  "author": "Michael Lawrie <michael@michaellawrie.com>",
+  "license": "Open Software License (OSL 3.0) https://opensource.org/licenses/OSL-3.0",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "sinon": "2.0.0-pre",
+    "mocha": "^2.4.5",
+    "sinon-chai": "sjmulder/sinon-chai#pr/sinon-2.0.0-pre",
+    "ts-loader": "",
+    "typescript": "1.9.0-dev.20160512",
+    "typings": "^0.8.1"
+  },
+  "dependencies": {
+    "immutable": "^3.7.6",
+    "base64-url": "",
+    "lodash": "",
+    "object-assign": "",
+    "knex": "",
+    "bookshelf": "",
+    "pg": "",
+    "mysql": "",
+    "sqlite3": "",
+    "express": "",
+    "path": "",
+    "bluebird": ""
+  }
+}

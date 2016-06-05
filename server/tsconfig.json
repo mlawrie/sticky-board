@@ -1,0 +1,22 @@
+{
+  "compileOnSave": true,
+  "buildOnSave": true,
+  "filesGlob": ["**/*.ts"],
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "jsx": "react"
+  },
+  "exclude": [
+    "node_modules",
+    "typings/browser",
+    "typings/browser.d.ts"
+  ]
+}
