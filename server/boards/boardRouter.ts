@@ -15,3 +15,13 @@ boardRouter.post('/boards', (req:express.Request, res:express.Response) => {
       res.write(err.toString())
     }).finally(() => res.end())
 })
+
+boardRouter.get('/boards/:name/:urlToken', (req:express.Request, res:express.Response) => {
+  boardCollection.getByUrlToken(req.params.urlToken).then((board) => {
+    res.header('Content-Type', 'application/json')
+    res.write(serializeBoard(board))
+  }).catch((err) => {
+    res.status(400)
+    res.write(err.toString())
+  }).finally(() => res.end())
+})

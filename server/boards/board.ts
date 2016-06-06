@@ -14,7 +14,13 @@ export interface Board {
 }
 
 const table = () => db('boards')
-const firstResult = (results: [any]) => results[0]
+
+const firstResult = (results: [any]) => {
+  if(results.length > 0) {
+    return results[0]
+  }
+  throw('record not found')
+}
 
 export const boardCollection = {
   getById: (id: number):Promise<Board> => table().where({id}).select('*').limit(1)
