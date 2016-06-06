@@ -1,9 +1,12 @@
 [![Build Status](https://travis-ci.org/mlawrie/sticky-board.svg?branch=master)](https://travis-ci.org/mlawrie/sticky-board)
 
 # Dev setup
-- npm install
-- npm run dev
-- npm test
+- make sure postgres is installed and working
+- `npm install`
+- `npm run build`
+- `npm devSetup` - sets up postgres
+- `npm test`
+- `npm start`
 - Probably use visual studio code to do stuff
 
 # Todos:
