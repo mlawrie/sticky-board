@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node_modules/.bin/typings install",
-    "build": "node_modules/.bin/tsc; cp knexfile.js dist/;",
+    "build": "node_modules/.bin/tsc; cp knexfile.js dist/; cp node_modules/jquery/dist/jquery.js public/",
     "buildRun": "npm run build; node dist/index.js",
     "test": "npm run build; node_modules/.bin/mocha dist/**/*.test.js"
   },
@@ -33,6 +33,7 @@
     "express": "",
     "path": "",
     "bluebird": "",
-    "body-parser": ""
+    "body-parser": "",
+    "jquery": ""
   }
 }

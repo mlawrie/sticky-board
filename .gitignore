@@ -3,3 +3,4 @@ typings/
 dist/
 npm-debug.log
 server/public/app.js
+server/public/jquery.js
