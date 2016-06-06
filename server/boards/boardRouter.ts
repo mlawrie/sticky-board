@@ -15,7 +15,7 @@ const writeError = (res:express.Response, code:number) => (err:any) => {
   res.write(err.toString())
 }
 
-boardRouter.post('/boards', (req:express.Request, res:express.Response) => {
+boardRouter.post('/api/boards', (req:express.Request, res:express.Response) => {
   const board = {url_token: base64url.encode(crypto.randomBytes(16)), name: req.body.name}
   boardCollection.insert(board)
     .then(writeBoard(res))
@@ -23,7 +23,7 @@ boardRouter.post('/boards', (req:express.Request, res:express.Response) => {
     .finally(() => res.end())
 })
 
-boardRouter.get('/boards/:name/:urlToken', (req:express.Request, res:express.Response) => {
+boardRouter.get('/api/boards/:name/:urlToken', (req:express.Request, res:express.Response) => {
   boardCollection.getByUrlToken(req.params.urlToken)
     .then(writeBoard(res))
     .catch(writeError(res, 400))
