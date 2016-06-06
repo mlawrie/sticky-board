@@ -47,7 +47,6 @@ describe('boardRouter', () => {
       }).end(() => callback(urlToken))
     }
     
-    
     it('returns the board', (done) => {
       makeBoard('cool', (urlToken: string) => {
         request(app).get('/boards/board_name/' + urlToken)
