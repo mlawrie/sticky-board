@@ -10,7 +10,6 @@
 - Add a sticky
 - Return stickies from server
 - Move sticky / edit sticky update server
-- Set up prod
 - click away turn off sticky edit mode
 - Update client of changes from other clients (big)
 - Some homepage design (big)
