@@ -6,7 +6,13 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node_modules/.bin/typings install",
-    "buildRun": "node_modules/.bin/tsc; cp knexfile.js dist/; cd dist/; node app.js"
+    "build": "node_modules/.bin/tsc; cp knexfile.js dist/;",
+    "buildRun": "npm run build; node server.js",
+    "createDevDbUser": "psql -c \"CREATE USER stickyboard WITH PASSWORD 'stickyboard'; ALTER user stickyboard createdb;\"",
+    "createTestDb": "PGPASSWORD=stickyboard createdb stickyboard_tests --user stickyboard",
+    "createDevDb": "PGPASSWORD=stickyboard createdb stickyboard_dev --user stickyboard",
+    "devSetup": "npm run createDevDbUser; npm run createDevDb; npm run createTestDb; node_modules/.bin/knex migrate:latest; node_modules/.bin/knex migrate:latest --env test",
+    "test": "npm run build; node_modules/.bin/mocha dist/**/*.test.js"
   },
   "author": "Michael Lawrie <michael@michaellawrie.com>",
   "license": "Open Software License (OSL 3.0) https://opensource.org/licenses/OSL-3.0",
@@ -17,7 +23,9 @@
     "sinon-chai": "sjmulder/sinon-chai#pr/sinon-2.0.0-pre",
     "ts-loader": "",
     "typescript": "1.9.0-dev.20160512",
-    "typings": "^0.8.1"
+    "typings": "^0.8.1",
+    "knex-cleaner": "",
+    "supertest": ""
   },
   "dependencies": {
     "immutable": "^3.7.6",
@@ -31,6 +39,7 @@
     "sqlite3": "",
     "express": "",
     "path": "",
-    "bluebird": ""
+    "bluebird": "",
+    "body-parser": ""
   }
 }

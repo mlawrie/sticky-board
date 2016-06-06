@@ -4,7 +4,8 @@ import knexfile = require('./knexfile')
 
 declare var global: any
 
-const createDB = () => knex((<any>knexfile).development)
+const environment = process.env.NODE_ENV || 'development' 
+const createDB = () => knex((<any>knexfile)[environment])
 
 if (typeof global.db === 'undefined') {
   global.db = createDB()
