@@ -30,6 +30,7 @@ module.exports = {
       sticky: 'src/sticky',
       canvas: 'src/canvas',
       utils: 'src/utils',
+      board: 'src/board',
       testHelpers: 'src/testHelpers'
     }
   },

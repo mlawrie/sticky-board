@@ -21,3 +21,7 @@ export const moveCanvasPositionAction = actionCreator<{x: number, y: number}>('U
 export const updateStickyAction = actionCreator<{x?: number, y?: number, uuid: string, editing?: boolean, body?: string}>('UPDATE_STICKY')
 export const moveStickyToTopAction = actionCreator<{uuid: string}>('MOVE_STICKY_TO_TOP')
 export const removeStickyAction = actionCreator<{uuid: string}>('REMOVE_STICKY')
+
+export const boardLoadedAction = actionCreator<{name: string}>('BOARD_LOADED')
+
+export const boardNotFoundAction = actionCreator<{}>('BOARD_NOT_FOUND')

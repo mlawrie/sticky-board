@@ -12,3 +12,4 @@ beforeEach(resetReduxForTests)
 export const expect = chai.expect
 export const sinon = sinonLib
 export const inject = injectMock
+export const waitForPromises = (callback:() => void) => setTimeout(callback, 0)

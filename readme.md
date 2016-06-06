@@ -5,3 +5,19 @@
 - npm run dev
 - npm test
 - Probably use visual studio code to do stuff
+
+# Todos:
+- Load board from endpoint
+- Add a sticky
+- Return stickies from server
+- Move sticky / edit sticky update server
+- Set up prod
+- click away turn off sticky edit mode
+- Update client of changes from other clients (big)
+- Some homepage design (big)
+- Validate board creation
+- Group/ungroup stickies
+- Vote on sticky / sticky group
+- Add titles to groups/board
+- Minimap
+- Encryption

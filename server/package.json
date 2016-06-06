@@ -23,7 +23,7 @@
     "sinon-chai": "sjmulder/sinon-chai#pr/sinon-2.0.0-pre",
     "ts-loader": "",
     "typescript": "1.9.0-dev.20160512",
-    "typings": "^0.8.1",
+    "typings": "0.8.1",
     "knex-cleaner": "",
     "supertest": ""
   },

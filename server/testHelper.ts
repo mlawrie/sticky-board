@@ -1,4 +1,3 @@
-/// <reference path="./typings/main/ambient/mocha/index.d.ts" />
 import * as chai from 'chai'
 import * as sinonLib from 'sinon'
 import * as sinonChai from 'sinon-chai'
