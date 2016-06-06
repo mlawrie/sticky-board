@@ -3,13 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <title>Sticky Board</title>
+  <script type="text/javascript" src="/jquery.js"></script>
+  <style type="text/css">
+    body {
+      font-family: sans-serif;
+    }
+    .error {
+      color: #f00;
+      margin: 10px 0px;
+    }
+    input[type=text] {
+      padding: 0px 10px;
+      line-height: 38px;
+      border: 1px solid #ddd;
+      margin: 0 0px 0 0;
+      width: 200px;
+      font-size: 20px;
+    }
+    input[type=submit] {
+      padding: 0 15px;
+      border: 0;
+      background: #07d;
+      color: #fff;
+      font-size: 20px;
+      line-height: 40px;
+      vertical-align: bottom;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
   <h1>Sticky Board</h1>
   <p>Make yer board:</p>
-  <form method="POST" action="/api/boards/">
+  <form>
     <input type="text" name="name" placeholder="Board name"/>
-    <input type="submit"/>
+    <input type="submit" value="Create"/>
+    <div class="error"></div>
   </form>
+  <script type="text/javascript">
+    $(function() {
+      $('form').submit(function (e) {
+        e.preventDefault()
+        var errorField = $(this).find('.error').hide()
+        if ($(this).find('[name=name]').val().length < 5) {
+          errorField.text('Board names must be at least 5 characters long').show()
+          return
+        }
+        $.ajax({
+          url: '/api/boards/',
+          type: 'post',
+          data: $(this).serialize(),
+          success: function(board) {
+            location.href = '/boards/' + board.name + '/' + board.url_token 
+          },
+          error: function(error) {
+            errorField.text('Something went wrong. Please try again later.').show()
+          }
+        })
+      })
+    })
+  </script>
 </body>
 </html>
