@@ -4,13 +4,15 @@
   "private": true,
   "description": "",
   "scripts": {
-    "start": "node server/dist/server.js",
+    "start": "node server/dist/index.js",
     "build": "(cd client; npm run build); (cd server; npm run build)",
     "postinstall": "(cd client; npm install); (cd server; npm install)",
+    "heroku-postbuild": "npm run build; npm run migrateLatest",
     "test": "(cd client; npm test); (cd server; npm test)",
     "createDevDbUser": "psql -c \"CREATE USER stickyboard WITH PASSWORD 'stickyboard'; ALTER user stickyboard createdb;\"",
     "createTestDb": "PGPASSWORD=stickyboard createdb stickyboard_tests --user stickyboard",
     "createDevDb": "PGPASSWORD=stickyboard createdb stickyboard_dev --user stickyboard",
+    "migrateLatest": "cd server; node_modules/.bin/knex migrate:latest",
     "devSetup": "npm run createDevDbUser; npm run createDevDb; npm run createTestDb; cd server; node_modules/.bin/knex migrate:latest; node_modules/.bin/knex migrate:latest --env test"
   },
   "author": "Michael Lawrie <michael@michaellawrie.com>",

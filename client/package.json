@@ -20,10 +20,12 @@
     "karma": "",
     "sinon-chai": "sjmulder/sinon-chai#pr/sinon-2.0.0-pre",
     "karma-webpack": "",
-    "ts-loader": "",
     "karma-phantomjs-launcher": "",
     "karma-mocha": "",
-    "phantomjs-prebuilt": "",
+    "phantomjs-prebuilt": ""
+  },
+  "dependencies": {
+    "ts-loader": "",
     "webpack-config": "",
     "typescript": "1.9.0-dev.20160512",
     "typings": "0.8.1",
@@ -31,9 +33,7 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.9.1",
     "webpack-split-by-path": "0.0.8",
-    "html-webpack-plugin": "^2.9.0"
-  },
-  "dependencies": {
+    "html-webpack-plugin": "^2.9.0",
     "immutable": "^3.7.6",
     "react": "^15.0.2",
     "react-addons-test-utils": "^15.0.2",
