@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info",
+    "build": "node_modules/.bin/webpack; cp dist/app.js ../server/public/",
     "postinstall": "node_modules/.bin/typings install",
     "test": "node_modules/karma/bin/karma start karma.config.js --single-run",
     "test-watch": "node_modules/karma/bin/karma start karma.config.js"
