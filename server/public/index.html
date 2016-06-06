@@ -54,7 +54,8 @@
           type: 'post',
           data: $(this).serialize(),
           success: function(board) {
-            location.href = '/boards/' + board.name + '/' + board.url_token 
+            var sanitizedName = board.name.toLowerCase().replace(/[^0-9a-z\_\- ]/g, '').replace(' ', '_')
+            location.href = '/boards/' + sanitizedName + '/' + board.url_token 
           },
           error: function(error) {
             errorField.text('Something went wrong. Please try again later.').show()
