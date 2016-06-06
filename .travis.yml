@@ -6,4 +6,4 @@ node_js:
 before_script:
   - psql -c 'create database stickyboard_ci;' -U postgres
 script: 
-  - cd client/; npm install; npm test; cd ../server; npm install; NODE_ENV=ci ./node_modules/.bin/knex migrate:latest; NODE_ENV=ci npm test  
+  - (cd server; NODE_ENV=ci ./node_modules/.bin/knex migrate:latest); NODE_ENV=ci npm test  

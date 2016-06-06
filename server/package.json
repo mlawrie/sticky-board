@@ -7,11 +7,7 @@
   "scripts": {
     "postinstall": "node_modules/.bin/typings install",
     "build": "node_modules/.bin/tsc; cp knexfile.js dist/;",
-    "buildRun": "npm run build; node dist/server.js",
-    "createDevDbUser": "psql -c \"CREATE USER stickyboard WITH PASSWORD 'stickyboard'; ALTER user stickyboard createdb;\"",
-    "createTestDb": "PGPASSWORD=stickyboard createdb stickyboard_tests --user stickyboard",
-    "createDevDb": "PGPASSWORD=stickyboard createdb stickyboard_dev --user stickyboard",
-    "devSetup": "npm run createDevDbUser; npm run createDevDb; npm run createTestDb; node_modules/.bin/knex migrate:latest; node_modules/.bin/knex migrate:latest --env test",
+    "buildRun": "npm run build; node dist/index.js",
     "test": "npm run build; node_modules/.bin/mocha dist/**/*.test.js"
   },
   "author": "Michael Lawrie <michael@michaellawrie.com>",
