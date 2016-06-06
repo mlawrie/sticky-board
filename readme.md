@@ -7,7 +7,6 @@
 - Probably use visual studio code to do stuff
 
 # Todos:
-- Load board from endpoint
 - Add a sticky
 - Return stickies from server
 - Move sticky / edit sticky update server
