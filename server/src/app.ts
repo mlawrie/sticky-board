@@ -1,6 +1,7 @@
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import { boardRouter } from './boards/boardRouter'
+import { stickyRouter } from './stickies/stickyRouter'
 import * as  path from 'path'
 
 export const app = express()
@@ -8,6 +9,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true})) 
 
 app.use(boardRouter)
+app.use(stickyRouter)
 
 app.use(express.static(path.join(__dirname, '../public')))
 
