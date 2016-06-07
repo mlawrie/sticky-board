@@ -4,7 +4,7 @@
   "private": true,
   "description": "",
   "scripts": {
-    "start": "node server/dist/index.js",
+    "start": "(cd server; npm start)",
     "build": "(cd client; npm run build); (cd server; npm run build)",
     "postinstall": "(cd client; npm install); (cd server; npm install)",
     "heroku-postbuild": "npm run build; npm run migrateLatest",

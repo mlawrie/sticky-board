@@ -1,7 +1,9 @@
-/// <reference path="../typings/main/ambient/mocha/index.d.ts" />
+/// <reference path="../../typings/main/ambient/mocha/index.d.ts" />
 import { request, Response, expect } from '../testHelper'
 import { app } from '../app'
 import * as express from 'express'
+import { boardCollection } from './board'
+import { stickyCollection } from '../stickies/sticky'
 
 describe('boardRouter', () => {
   describe('POST /api/boards', () => {
@@ -46,6 +48,44 @@ describe('boardRouter', () => {
           urlToken = res.body.url_token
       }).end(() => callback(urlToken))
     }
+    
+    it('returns stickies associated with the board', (done) => {
+      boardCollection.insert({name: 'foo', url_token: 'url_token'})
+        .then((board) => stickyCollection.insert({body: 'some sticky', board_id: board.id, x: 10, y: 11, uuid: 'uuid1234'}))
+        .then((sticky) => {
+          request(app).get('/api/boards/foo/url_token')
+            .expect((res: Response) => {
+              expect(res.body.stickies.length).to.eql(1)
+              expect(res.body.stickies[0].body).to.eql('some sticky')
+              expect(res.body.stickies[0].uuid).to.eql('uuid1234')
+              expect(res.body.stickies[0].x).to.eql(10)
+              expect(res.body.stickies[0].y).to.eql(11)
+              expect(Object.keys(res.body.stickies[0]).sort()).to.eql(['body', 'uuid', 'x', 'y'])
+            })
+            .expect(200, done)
+        })
+    })
+    
+    it('returns no stickies if none are associated with the board', (done) => {
+      boardCollection.insert({name: 'foo', url_token: 'url_token'})
+        .then((board) => {
+          request(app).get('/api/boards/foo/url_token')
+            .expect((res: Response) => {
+              expect(res.body.stickies.length).to.eql(0)
+            })
+            .expect(200, done)
+        })
+    })
+    
+    it('returns only certain attributes', (done) => {
+      makeBoard('cool', (urlToken: string) => {
+        request(app).get('/api/boards/board_name/' + urlToken)
+          .expect((res: Response) => {
+            expect(Object.keys(res.body)).to.eql(['name', 'url_token', 'stickies'])
+          })
+          .expect(200, done)
+      })
+    })
     
     it('returns the board', (done) => {
       makeBoard('cool', (urlToken: string) => {

@@ -1,6 +1,6 @@
 
 import knex = require('knex')
-import knexfile = require('./knexfile')
+import knexfile = require('../knexfile')
 
 declare var global: any
 

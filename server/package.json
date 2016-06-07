@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "start": "node dist/index.js",
     "postinstall": "node_modules/.bin/typings install",
     "build": "node_modules/.bin/tsc; cp knexfile.js dist/; cp node_modules/jquery/dist/jquery.js public/",
     "buildRun": "npm run build; node dist/index.js",
