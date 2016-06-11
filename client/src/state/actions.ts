@@ -20,6 +20,7 @@ export const createStickyAction = actionCreator<{x: number, y: number, body: str
 export const loadStickyFromServerAction = actionCreator<{x: number, y: number, body: string, uuid:string}>('LOAD_STICKY_FROM_SERVER')
 export const moveCanvasPositionAction = actionCreator<{x: number, y: number}>('UPDATE_CANVAS_POSITION')
 export const updateStickyAction = actionCreator<{x?: number, y?: number, uuid: string, editing?: boolean, body?: string}>('UPDATE_STICKY')
+export const interactionFinishedStickyAction = actionCreator<{uuid: string}>('INTERACTION_FINISHED_STICKY')
 export const moveStickyToTopAction = actionCreator<{uuid: string}>('MOVE_STICKY_TO_TOP')
 export const removeStickyAction = actionCreator<{uuid: string}>('REMOVE_STICKY')
 

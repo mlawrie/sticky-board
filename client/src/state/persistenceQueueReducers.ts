@@ -1,4 +1,4 @@
-import { isType, updateStickyAction, createStickyAction, removeStickyAction, persistenceQueueSuccessAction, Action } from 'state/actions'
+import { isType, createStickyAction, interactionFinishedStickyAction, persistenceQueueSuccessAction, Action } from 'state/actions'
 import combine from 'utils/combine'
 import Immutable = require('immutable')
 import * as makeUuid from 'node-uuid'
@@ -20,7 +20,7 @@ const cloneAction = <T>(action: Action<T>): {} & Action<T> =>
 const makeQueueItem = <T>(action: Action<T>) => ({queueUuid: makeUuid.v1(), action: cloneAction(action)})
 
 export const persistenceQueueReducers = (state: PersistenceQueue = Immutable.List<QueueItem>(), action: Action<any>): PersistenceQueue => {
-  if (isType(action, createStickyAction)) {
+  if (isType(action, createStickyAction) || isType(action, interactionFinishedStickyAction)) {
     return state.push(makeQueueItem(action))   
   }
 
