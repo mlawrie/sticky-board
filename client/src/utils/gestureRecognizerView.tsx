@@ -18,6 +18,7 @@ const distance = (v1:Vector, v2:Vector) => Math.sqrt(Math.pow(v2.x - v1.x, 2) + 
 
 interface GestureRecognizerViewProps {
     readonly onDragged: (v:Vector) => void
+    readonly onDragFinished: () => void
     readonly onClicked: () => void
     readonly threshold: number
     readonly children?: Element[]
@@ -38,7 +39,7 @@ export class GestureRecognizerView extends React.Component<GestureRecognizerView
         }
         
         const cleanup = () => {
-            eventListener.remove('mouseup', cleanup)
+            eventListener.remove('mouseup', mouseUp)
             eventListener.remove('mouseleave', cleanup)
             eventListener.remove('mousemove', mouseMove)
         }
@@ -46,8 +47,10 @@ export class GestureRecognizerView extends React.Component<GestureRecognizerView
         const mouseUp = (ev:MouseEvent) => {
             if (distance(makeVector(ev), initialPosition) < this.props.threshold) {
                 this.props.onClicked()    
+            } else {
+                this.props.onDragFinished()
             }
-            cleanup()    
+            cleanup()
         } 
         
         eventListener.add('mousemove', mouseMove)

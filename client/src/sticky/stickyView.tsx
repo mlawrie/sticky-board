@@ -15,12 +15,9 @@ interface StickyViewState {
 }
 
 export default class StickyView extends React.Component<{uuid: string}, StickyViewState> {
-  private interactionPossiblyFinished: () => void
   constructor(props: any) {
     super(props)
-    const interactionFinishedAction = () => dispatch(interactionFinishedStickyAction({uuid: this.props.uuid}))
-    this.interactionPossiblyFinished = _.throttle(interactionFinishedAction, 1000, {leading: false, trailing: true})
-
+    
     subscribe<StickyViewState>((state) => ({
       sticky: state.stickies.get(this.props.uuid),
       canvas: state.canvas
@@ -31,7 +28,6 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     if (this.state.sticky.editing) {
       const onChange = (e:React.SyntheticEvent) => {
         dispatch(updateStickyAction({uuid: this.props.uuid, body: (e.target as any).value}))
-        this.interactionPossiblyFinished()
       }
       return <span>
         <textarea onChange={(onChange)} rows={3} autoFocus style={styles.inside} type="text" value={this.state.sticky.body}/>
@@ -49,7 +45,6 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
       const x = this.state.sticky.x + delta.x
       const y = this.state.sticky.y + delta.y
       dispatch(updateStickyAction({uuid: this.props.uuid, x, y, editing: false}))
-      this.interactionPossiblyFinished()
     }
 
     const onMouseDown = (event:React.MouseEvent) => dispatch(moveStickyToTopAction({uuid: this.props.uuid}))
@@ -65,6 +60,9 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     return (
       <GestureRecognizerView
         onDragged={onDrag}
+        onDragFinished={() => {
+          dispatch(interactionFinishedStickyAction({uuid: this.props.uuid}))
+        }}
         onClicked={() => dispatch(updateStickyAction({uuid: this.props.uuid, editing: true}))}
         threshold={10}>
         <div style={style} onMouseDown={onMouseDown}>
