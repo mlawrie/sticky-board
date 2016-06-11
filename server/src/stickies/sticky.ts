@@ -26,7 +26,11 @@ export const stickyCollection = {
     
   getByBoardId: (board_id: number):Promise<[Sticky]> => table().where({board_id}).select('*'),
   
-  insert: (board: CreateSticky):Promise<Sticky> => table().insert(board).returning('id')
+  insert: (sticky: CreateSticky):Promise<Sticky> => table().insert(sticky).returning('id')
+    .then(firstResult)
+    .then((id) => stickyCollection.getById(id)),
+
+  update: (sticky: CreateSticky):Promise<Sticky> => table().where({board_id: sticky.board_id, uuid: sticky.uuid}).update(sticky).returning('id')
     .then(firstResult)
     .then((id) => stickyCollection.getById(id))
 }

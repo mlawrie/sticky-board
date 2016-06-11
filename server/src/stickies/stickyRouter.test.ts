@@ -6,15 +6,53 @@ import { boardCollection, Board } from '../boards/board'
 import { stickyCollection } from '../stickies/sticky'
 
 describe('stickyRouter', () => {
-  describe('POST /api/stickies', () => {
-    let board:Board
+  let board:Board
     
-    beforeEach((done) => {
-      boardCollection.insert({name: 'foo board', url_token: 'some_url_token'}).then((createdBoard) => {
-        board = createdBoard
-        done()
-      })
+  beforeEach((done) => {
+    boardCollection.insert({name: 'foo board', url_token: 'some_url_token'}).then((createdBoard) => {
+      board = createdBoard
+      done()
     })
+  })
+
+  describe.only('PUT /api/stickies', () => {
+    beforeEach(() => {
+      stickyCollection.insert({x: 123, y: 999, body: 'foo', uuid: 'some uuid', board_id: board.id})
+    })
+
+    it('updates a sticky', (done) => {  
+      request(app).put('/api/stickies')
+        .send({body: 'some new body', uuid: 'some uuid', x: 1, y: 2, url_token: 'some_url_token'})
+        .expect('Content-Type', /json/)
+        .expect((res: Response) => {
+          expect(res.body.body).to.eql('some new body')
+          expect(res.body.x).to.eql(1)
+          expect(res.body.y).to.eql(2)
+          expect(res.body.uuid).to.eql('some uuid')
+        })
+        .expect(200, done)
+    })
+
+    it('returns error if url_token is invalid', (done) => {
+      request(app).put('/api/stickies')
+        .send({body: 'some body', uuid: 'some uuid', x: 1, y: 2, url_token: 'foo'})
+        .expect((res: Response) => {
+          expect(res.text).to.contain('record not found')
+        })
+        .expect(422, done)
+    })
+
+    it('returns error if uuid is invalid', (done) => {
+      request(app).put('/api/stickies')
+        .send({body: 'some body', uuid: 'other uuid', x: 1, y: 2, url_token: 'some_url_token'})
+        .expect((res: Response) => {
+          expect(res.text).to.contain('record not found')
+        })
+        .expect(422, done)
+    })
+  })
+
+  describe('POST /api/stickies', () => {
     
     it('creates a sticky', (done) => {
       request(app).post('/api/stickies')
@@ -29,7 +67,7 @@ describe('stickyRouter', () => {
         .expect(200, done)
     })
     
-    it('returns error if sticky is invalid ', (done) => {
+    it('returns error if sticky is invalid', (done) => {
       request(app).post('/api/stickies')
         .send({body: 'some body', x: 123, y: 234, url_token: 'some_url_token'})
         .expect((res: Response) => {
