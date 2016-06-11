@@ -30,7 +30,15 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
         dispatch(updateStickyAction({uuid: this.props.uuid, body: (e.target as any).value}))
       }
       return <span>
-        <textarea onChange={(onChange)} rows={3} autoFocus style={styles.inside} type="text" value={this.state.sticky.body}/>
+        <textarea
+          onChange={(onChange)}
+          onBlur={() => dispatch(interactionFinishedStickyAction({uuid: this.props.uuid}))}
+          rows={3}
+          autoFocus
+          style={styles.inside}
+          type="text"
+          value={this.state.sticky.body}
+          />
       </span>  
     }
     return <div style={styles.inside}>{this.state.sticky.body}</div>
@@ -60,9 +68,7 @@ export default class StickyView extends React.Component<{uuid: string}, StickyVi
     return (
       <GestureRecognizerView
         onDragged={onDrag}
-        onDragFinished={() => {
-          dispatch(interactionFinishedStickyAction({uuid: this.props.uuid}))
-        }}
+        onDragFinished={() => dispatch(interactionFinishedStickyAction({uuid: this.props.uuid}))}
         onClicked={() => dispatch(updateStickyAction({uuid: this.props.uuid, editing: true}))}
         threshold={10}>
         <div style={style} onMouseDown={onMouseDown}>
