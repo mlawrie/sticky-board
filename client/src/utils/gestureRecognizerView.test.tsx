@@ -68,7 +68,7 @@ describe('mouseDragMonitor', () => {
       expect(callback).is.called
     })
 
-    it.only('should not trigger onDragFinished when no dragging took place', () => {
+    it('should not trigger onDragFinished when no dragging took place', () => {
       const callback = sinon.stub()
       const wrapper = shallow(<GestureRecognizerView onDragged={() => {}} onDragFinished={callback} onClicked={() => {}} threshold={5}/>)
       
