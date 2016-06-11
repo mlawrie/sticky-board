@@ -10,10 +10,9 @@
 - Probably use visual studio code to do stuff
 
 # Todos:
-- Add a sticky
-- Return stickies from server
-- Move sticky / edit sticky update server
+- delete sticky on server
 - click away turn off sticky edit mode
+- add UI for network interruption / offline
 - Update client of changes from other clients (big)
 - Some homepage design (big)
 - Validate board creation
@@ -26,6 +25,7 @@
 # Emergent requirements:
 - Return 200 from PUT /api/stickies if the sticky was deleted by somebody else
 - Deduplicate contents of persistenceQueue so that only most recent data is sent when offline
+- A new sticky returning 422 probably should be just deleted from screen with an error-- user has no way to recover. Changes should probably be reverted in that case, too.
 
 #Tech debt:
 - move loadBoard API call from boardView to api/

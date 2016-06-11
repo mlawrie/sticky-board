@@ -15,7 +15,7 @@ describe('stickyRouter', () => {
     })
   })
 
-  describe.only('PUT /api/stickies', () => {
+  describe('PUT /api/stickies', () => {
     beforeEach(() => {
       stickyCollection.insert({x: 123, y: 999, body: 'foo', uuid: 'some uuid', board_id: board.id})
     })
