@@ -22,3 +22,9 @@
 - Add titles to groups/board
 - Minimap
 - Encryption
+
+# Emergent requirements:
+- Return 200 from PUT /api/stickies if the sticky was deleted by somebody else
+- Deduplicate contents of persistenceQueue so that only most recent data is sent when offline
+
+

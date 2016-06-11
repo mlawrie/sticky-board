@@ -13,7 +13,6 @@ const writeError = (res:express.Response, code:number) => (err:any) => {
   res.write(err.toString())
 }
 
-// TODO: Return 200 if the sticky was deleted by somebody else
 stickyRouter.put('/api/stickies', (req:express.Request, res:express.Response) => {
   return boardCollection.getByUrlToken(req.body.url_token)
     .then((board) => {
