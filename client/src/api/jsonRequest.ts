@@ -7,8 +7,6 @@ export interface NetworkResponse {
 }
 
 export class NetworkError extends Error {
-  //constructor(private _message:string, private _status:number) {}
-  
   constructor(message?: string, public status?: number) {
     super(message)
   }
