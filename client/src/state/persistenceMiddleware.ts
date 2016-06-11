@@ -19,6 +19,7 @@ const persist = () => {
   }
 
   const item = queue.first()
+  
   mockable(() => sendActionToServer)(item.action)
   .then(() => {
     dispatch(persistenceQueueSuccessAction({queueUuid: item.queueUuid}))

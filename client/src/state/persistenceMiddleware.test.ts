@@ -13,14 +13,13 @@ describe('persistenceMiddleware', () => {
     injectMock(() => new Timer(), () => mockTimer)
   })
 
-  it('clears a createStickyAction from the queue', (done) => {
+  it('clears a createStickyAction from the queue', () => {
     injectMock(() => sendActionToServer, () => () => Promise.resolve())
     expect(getState().persistenceQueue.count()).to.eql(0)
     dispatch(createStickyAction({x: 1, y: 2, body: 'some sticky'}))
     expect(getState().persistenceQueue.count()).to.eql(1)
-    waitForPromises().then(() => {
+    return waitForPromises().then(() => {
       expect(getState().persistenceQueue.count()).to.eql(0)
-      done()
     })
   })
 
@@ -32,25 +31,24 @@ describe('persistenceMiddleware', () => {
     expect(stub.firstCall.args[0].type).to.eql('CREATE_STICKY')
   })
 
-  it('does not clear a createStickyAction from the queue when the request fails', (done) => {
+  it('does not clear a createStickyAction from the queue when the request fails', () => {
     injectMock(() => sendActionToServer, () => () => Promise.reject(new Error()))
     expect(getState().persistenceQueue.count()).to.eql(0)
     dispatch(createStickyAction({x: 1, y: 2, body: 'some sticky'}))
     expect(getState().persistenceQueue.count()).to.eql(1)
 
-    waitForPromises().then(() => {
+    return waitForPromises().then(() => {
       expect(getState().persistenceQueue.count()).to.eql(1)
-      done()
     })
   })
 
-  it('retries failures', (done) => {
+  it('retries failures', () => {
     const stub = sinon.stub()
     stub.returns(Promise.reject(new Error('foo')))
     injectMock(() => sendActionToServer, () => stub as any)
     dispatch(createStickyAction({x: 1, y: 2, body: 'some sticky'}))
 
-    waitForPromises()
+    return waitForPromises()
       .then(() => {
         expect(getState().persistenceQueue.count()).to.eql(1)
         stub.returns(Promise.resolve())
@@ -63,7 +61,6 @@ describe('persistenceMiddleware', () => {
       .then(() => {
         expect(getState().persistenceQueue.count()).to.eql(0)
         expect(stub).to.have.been.calledTwice
-        done()
       })
   })
 })
