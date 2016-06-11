@@ -1,5 +1,5 @@
 import * as Promise from 'bluebird'
-import { Action, isType, createStickyAction, interactionFinishedStickyAction } from 'state/actions'
+import { Action, isType, createStickyAction, updateStickyAction, interactionFinishedStickyAction } from 'state/actions'
 import { jsonRequest } from 'api/jsonRequest'
 import { mockable } from 'utils/injector'
 import { getState } from 'state/reduxStore'
