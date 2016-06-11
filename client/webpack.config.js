@@ -31,6 +31,7 @@ module.exports = {
       canvas: 'src/canvas',
       utils: 'src/utils',
       board: 'src/board',
+      api: 'src/api',
       testHelpers: 'src/testHelpers'
     }
   },

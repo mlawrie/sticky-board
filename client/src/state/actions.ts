@@ -25,3 +25,5 @@ export const removeStickyAction = actionCreator<{uuid: string}>('REMOVE_STICKY')
 export const boardLoadedAction = actionCreator<{name: string}>('BOARD_LOADED')
 
 export const boardNotFoundAction = actionCreator<{}>('BOARD_NOT_FOUND')
+
+export const persistenceQueueSuccessAction = actionCreator<{queueUuid: string}>('PERSISTENCE_QUEUE_SUCCESS')

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { subscribe } from 'state/subscribe'
 import { Board } from 'board/board'
-import { jsonRequest, NetworkError } from 'utils/jsonRequest'
+import { jsonRequest, NetworkError } from 'api/jsonRequest'
 import { dispatch } from 'state/reduxStore'
 import { boardLoadedAction, boardNotFoundAction } from 'state/actions'
 import { mockable } from 'utils/injector'

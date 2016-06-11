@@ -4,7 +4,7 @@ import * as React from 'react'
 import BoardView from 'board/boardView'
 import { dispatch, getState } from 'state/reduxStore'
 import { boardLoadedAction } from 'state/actions'
-import { jsonRequest, JSONRequestBody, NetworkResponse, NetworkError } from 'utils/jsonRequest'
+import { jsonRequest, JSONRequestBody, NetworkResponse, NetworkError } from 'api/jsonRequest'
 import * as Promise from 'bluebird'
 
 describe('BoardView', () => {
@@ -38,7 +38,7 @@ describe('BoardView', () => {
   it('sets board name on load', (done) => {
     jsonRequestStub.returns(Promise.resolve({json: {name: 'fancy board'}}))
     const wrapper = mount(<BoardView><p></p></BoardView>)
-    waitForPromises(() => {
+    waitForPromises().then(() => {
       expect(wrapper.text()).to.contain('fancy board')  
       done()
     })
@@ -47,7 +47,7 @@ describe('BoardView', () => {
   it('shows an error when board load fails', (done) => {
     jsonRequestStub.returns(Promise.reject(new NetworkError('foo', 404)))
     const wrapper = mount(<BoardView><p></p></BoardView>)
-    waitForPromises(() => {
+    waitForPromises().then(() => {
       expect(wrapper.text()).to.contain('board not found')  
       done()
     })
