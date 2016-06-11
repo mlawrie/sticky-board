@@ -1,4 +1,4 @@
-import {isType, updateStickyAction, createStickyAction, moveStickyToTopAction, removeStickyAction, Action} from 'state/actions'
+import {isType, updateStickyAction, createStickyAction, loadStickyFromServerAction, moveStickyToTopAction, removeStickyAction, Action} from 'state/actions'
 import {Sticky, modifySticky} from 'sticky/sticky'
 import combine from 'utils/combine'
 import makeUuid = require('node-uuid')
@@ -16,9 +16,15 @@ const markNotEdited = (sticky:Sticky) => modifySticky(sticky, {editing: false})
 export const stickiesReducers = (state: Stickies = Immutable.Map<string, Sticky>(), action: Action<any>): Stickies => {
   const getUuuid = (sticky:Sticky) => state.keyOf(sticky)
   
-  if (isType(action, createStickyAction)) {
-    const sticky = combine(action.payload, {z: state.size + 1, editing: false})
-    return state.set(makeUuid.v1(), sticky)
+  if (isType(action, createStickyAction) || isType(action, loadStickyFromServerAction)) {
+    const sticky = {
+      x: action.payload.x,
+      y: action.payload.y,
+      editing: false,
+      body: action.payload.body,
+      z: state.size + 1
+    }
+    return state.set(action.payload.uuid, sticky)
   }
    
   if (isType(action, updateStickyAction)) {

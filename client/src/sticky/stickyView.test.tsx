@@ -11,7 +11,7 @@ describe('StickyView', () => {
   let wrapper:CommonWrapper<any, {}>
   
   beforeEach(() => {
-    dispatch(createStickyAction({x: 100, y: 100, body: 'foo'}))
+    dispatch(createStickyAction({x: 100, y: 100, body: 'foo', uuid: 'foo'}))
     uuid = getState().stickies.keySeq().first()
     wrapper = mount(<StickyView uuid={uuid}/>)
     

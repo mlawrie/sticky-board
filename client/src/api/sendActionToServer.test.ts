@@ -15,7 +15,7 @@ describe('persistenceMiddleware', () => {
   })
 
   it('sends createStickyAction to POST /api/stickies', () => {
-    const action = createStickyAction({x: 999, y: 123, body: 'foo'})
+    const action = createStickyAction({x: 999, y: 123, body: 'foo', uuid: 'uuid'})
     dispatch(action)
     return waitForPromises().then(() => {
       expect(jsonRequestStub.firstCall.args[0].uri).to.eql('/api/stickies')
@@ -24,13 +24,12 @@ describe('persistenceMiddleware', () => {
   })
 
   it('sends params for createStickyAction', () => {
-    const sticky = {x: 999, y: 123, body: 'foo'}
+    const sticky = {x: 999, y: 123, body: 'foo', uuid: 'uuid val'}
     const action = createStickyAction(sticky)
     dispatch(action)
-    const uuid = getState().stickies.keySeq().first()
     const url_token = 'some_url_token' 
     return waitForPromises().then(() => {
-      expect(jsonRequestStub.firstCall.args[0].body).to.eql(combine(sticky, {uuid, url_token}))
+      expect(jsonRequestStub.firstCall.args[0].body).to.eql(combine(sticky, {url_token}))
     })
   })
 })

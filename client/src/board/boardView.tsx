@@ -3,7 +3,7 @@ import { subscribe } from 'state/subscribe'
 import { Board } from 'board/board'
 import { jsonRequest, NetworkError } from 'api/jsonRequest'
 import { dispatch } from 'state/reduxStore'
-import { boardLoadedAction, boardNotFoundAction } from 'state/actions'
+import { boardLoadedAction, boardNotFoundAction, loadStickyFromServerAction } from 'state/actions'
 import { mockable } from 'utils/injector'
 
 interface Props {
@@ -20,7 +20,12 @@ const loadBoard = () => {
   
   const uri = pathname.replace(/^\/boards\//, '/api/boards/')
   requester({uri, body: {}})
-    .then((response) => dispatch(boardLoadedAction({name: response.json.name})))
+    .then((response) => {
+      if (typeof response.json.stickies === 'object') {
+        response.json.stickies.forEach((sticky: any) => dispatch(loadStickyFromServerAction(sticky)))
+      }
+      dispatch(boardLoadedAction({name: response.json.name}))
+    })
     .catch(NetworkError, (error: NetworkError) => {
       if (error.status < 500) {
         dispatch(boardNotFoundAction({}))

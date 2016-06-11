@@ -43,6 +43,18 @@ describe('BoardView', () => {
       done()
     })
   })
+
+  it('initializes stickies on load', () => {
+    jsonRequestStub.returns(Promise.resolve({json: {name: 'fancy board', stickies: [{"body":"Test!","uuid":"someUuid","x":300,"y":400}]}}))
+    const wrapper = mount(<BoardView><p></p></BoardView>)
+    return waitForPromises().then(() => {
+      expect(getState().stickies.count()).to.eql(1)
+      expect(getState().stickies.first().body).to.eql('Test!')
+      expect(getState().stickies.first().x).to.eql(300)
+      expect(getState().stickies.first().y).to.eql(400)
+      expect(getState().stickies.keySeq().first()).to.eql('someUuid')
+    })
+  })
   
   it('shows an error when board load fails', (done) => {
     jsonRequestStub.returns(Promise.reject(new NetworkError('foo', 404)))

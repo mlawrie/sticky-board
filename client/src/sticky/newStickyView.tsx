@@ -1,12 +1,14 @@
 import * as React from 'react'
 import { createStickyAction } from 'state/actions'
 import { dispatch } from 'state/reduxStore'
+import makeUuid = require('node-uuid')
+
 export class NewStickyView extends React.Component<{}, {}> {
   render() {
     return (
       <div style={style} onClick={() => {
         const body = prompt("Enter sticky text")
-        dispatch(createStickyAction({x: 300, y: 300, body: body || ""}))
+        dispatch(createStickyAction({x: 300, y: 300, body: body || "", uuid: makeUuid.v1()}))
       }}>+</div>
     )
   }
