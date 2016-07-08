@@ -10,7 +10,7 @@
 - Probably use visual studio code to do stuff
 
 # Todos:
-- delete sticky on server
+- complete sticky delete client impl
 - click away turn off sticky edit mode
 - add UI for network interruption / offline
 - Update client of changes from other clients (big)

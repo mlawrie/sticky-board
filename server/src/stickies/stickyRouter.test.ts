@@ -15,6 +15,46 @@ describe('stickyRouter', () => {
     })
   })
 
+  describe('DELETE /api/stickies', () => {
+    beforeEach(() => {
+      stickyCollection.insert({x: 123, y: 999, body: 'foo', uuid: 'some uuid', board_id: board.id})
+    })
+
+    it('deletes a sticky', (done) => {
+      request(app).delete('/api/stickies')
+        .send({uuid: 'some uuid', url_token: 'some_url_token'})
+        .expect('Content-Type', /json/)
+        .expect((res: Response) => {
+          expect(res.body).to.eql({})
+        })
+        .expect(200, () => {
+          stickyCollection.getByBoardId(board.id).then((sticky) => {
+            expect(sticky.length).to.eql(0)
+            done()
+          })
+        })
+    })
+
+    it('returns error if url_token is invalid', (done) => {
+      request(app).delete('/api/stickies')
+        .send({uuid: 'some uuid', url_token: 'dfssdf'})
+        .expect((res: Response) => {
+          expect(res.text).to.contain('record not found')
+        })
+        .expect(422, done)
+    })
+
+    it('returns error if uuid is invalid', (done) => {
+      request(app).delete('/api/stickies')
+        .send({uuid: 'sdfsdfsdf', url_token: 'some_url_token'})
+        .expect((res: Response) => {
+          expect(res.text).to.contain('record not found')
+        })
+        .expect(422, done)
+    })
+
+  })
+
   describe('PUT /api/stickies', () => {
     beforeEach(() => {
       stickyCollection.insert({x: 123, y: 999, body: 'foo', uuid: 'some uuid', board_id: board.id})

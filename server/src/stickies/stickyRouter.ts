@@ -13,6 +13,18 @@ const writeError = (res:express.Response, code:number) => (err:any) => {
   res.write(err.toString())
 }
 
+stickyRouter.delete('/api/stickies', (req:express.Request, res:express.Response) => {
+  return boardCollection.getByUrlToken(req.body.url_token)
+    .then((board) => stickyCollection.deleteByBoardIdAndUuid(board.id, req.body.uuid))
+    .then(() => {
+      res.header('Content-Type', 'application/json')
+      res.status(200)
+      res.write('{}')
+    })
+    .catch(writeError(res, 422))
+    .finally(() => res.end())
+})
+
 stickyRouter.put('/api/stickies', (req:express.Request, res:express.Response) => {
   return boardCollection.getByUrlToken(req.body.url_token)
     .then((board) => {

@@ -32,7 +32,15 @@ export const stickyCollection = {
 
   update: (sticky: CreateSticky):Promise<Sticky> => table().where({board_id: sticky.board_id, uuid: sticky.uuid}).update(sticky).returning('id')
     .then(firstResult)
-    .then((id) => stickyCollection.getById(id))
+    .then((id) => stickyCollection.getById(id)),
+
+  deleteByBoardIdAndUuid: (board_id: number, uuid: string) => table().where({board_id, uuid})
+    .delete()
+    .then((numDeleted) => {
+      if (numDeleted == 0) {
+        throw( new Error('record not found'))
+      }
+    })
 }
 
 export const serializeSticky = (board: Sticky) => filterKeys(board, ['body', 'x', 'y', 'uuid'])
