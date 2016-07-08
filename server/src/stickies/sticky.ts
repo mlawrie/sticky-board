@@ -21,20 +21,26 @@ export interface Sticky {
 const table = () => db('stickies')
 
 export const stickyCollection = {
-  getById: (id: number):Promise<Sticky> => table().where({id}).select('*').limit(1)
+  getById: (id: number):Promise<Sticky> => table()
+    .where({id}).select('*').limit(1)
     .then(firstResult),
     
-  getByBoardId: (board_id: number):Promise<[Sticky]> => table().where({board_id}).select('*'),
+  getByBoardId: (board_id: number):Promise<[Sticky]> => table()
+    .where({board_id}).select('*'),
   
-  insert: (sticky: CreateSticky):Promise<Sticky> => table().insert(sticky).returning('id')
+  insert: (sticky: CreateSticky):Promise<Sticky> => table()
+    .insert(sticky).returning('id')
     .then(firstResult)
     .then((id) => stickyCollection.getById(id)),
 
-  update: (sticky: CreateSticky):Promise<Sticky> => table().where({board_id: sticky.board_id, uuid: sticky.uuid}).update(sticky).returning('id')
+  update: (sticky: CreateSticky):Promise<Sticky> => table()
+    .where({board_id: sticky.board_id, uuid: sticky.uuid})
+    .update(sticky).returning('id')
     .then(firstResult)
     .then((id) => stickyCollection.getById(id)),
 
-  deleteByBoardIdAndUuid: (board_id: number, uuid: string) => table().where({board_id, uuid})
+  deleteByBoardIdAndUuid: (board_id: number, uuid: string) => table()
+    .where({board_id, uuid})
     .delete()
     .then((numDeleted) => {
       if (numDeleted == 0) {
